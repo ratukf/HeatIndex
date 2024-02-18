@@ -16,9 +16,10 @@ function calculateHeatIndex() {
   // Dapatkan nilai heat index dari matriks heatIndexMatrix
   var heatIndexValue = heatIndexMatrix[columnIndex][rowIndex];
 
-  // Tentukan kategori, rekomendasi kerja/istirahat, dan kebutuhan air mineral
+  // Inisiasi variabel kategori bahaya, rekomendasi kerja:istirahat, dan kebutuhan air mineral
   var category, recommendation, waterRequirement;
 
+  // Logika untuk menentukan kategori bahaya, rekomendasi kerja:istirahat, dan kebutuhan air mineral berdasarkan nilai heat index
   if (heatIndexValue >= 52 || typeof heatIndexValue === 'string') {
     category = "Bahaya Ekstrem**";
     recommendation = "20:10";
@@ -55,7 +56,7 @@ function findIndex(array, value) {
   return -1; // Return -1 jika tidak ditemukan
 }
 
-// Matriks heatIndexMatrix
+// Chart Heat Index Matrix
 var heatIndexMatrix = [
   [null, 10, 20, 30, 40, 50, 60, 70, 80, 90],
   [50, "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan", "Tidak Diperkenankan"],
