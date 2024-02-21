@@ -146,11 +146,20 @@ var dataBebanKerja = {
 
 // Fungsi untuk memisahkan kata 'mendaki' dengan spasi dan mengkapitalkan huruf awal
 function hurufKapital(string) {
-  // Pisahkan kata "mendaki" dengan spasi jika ditemukan
   string = string.replace(/mendaki/g, ' mendaki');
-
-  // Kapitalisasi hanya huruf awal dari string
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Fungsi untuk menyesuaikan event listener pada tiap card baru
+function adjustEventListenersForCard(cardClone) {
+    // Misalnya ada dua tombol dengan class 'action-button1' dan 'action-button2'
+    cardClone.querySelectorAll('.action-button1').forEach(button => {
+        button.addEventListener('click', function() { action1(this); });
+    });
+    cardClone.querySelectorAll('.action-button2').forEach(button => {
+        button.addEventListener('click', function() { action2(this); });
+    });
+    // Lanjutkan dengan pattern yang sama untuk tombol lainnya
 }
 
 // Fungsi untuk validasi apakah form beban kerja sudah terisi
@@ -200,9 +209,11 @@ function cariBebanKerja() {
       jenisPekerjaanText = "Tidak teridentifikasi";
   }
   
+  // Mengidentifikasi contoh pekerjaan dari data beban kerja
   var kategoriPekerjaanText = dataBebanKerja.jenisPekerjaan.find(jenis => jenis.nama === jenisPekerjaan)
   .kategoriPekerjaan.find(kategori => kategori.nama === kategoriPekerjaan).contoh;
 
+  // Menampilkan informasi indeks beban kerja
   document.getElementById("jenisPekerjaanText").textContent = 
     jenisPekerjaanText;
   document.getElementById("kategoriPekerjaanText").textContent = 
@@ -214,17 +225,16 @@ function cariBebanKerja() {
   document.getElementById("indeksBebanKerjaText").textContent =
     nilaiBebanKerja || "Nilai tidak ditemukan";
 
-
-
+  // Menampilkan informasi jika terdapat sebuah nilai pada indeks beban kerja
   var hasilIdentifikasi = document.getElementById('hasilIdentifikasiNilaiBebanKerja');
   if (nilaiBebanKerja) {
-    hasilIdentifikasi.style.display = 'block'; // Menampilkan div jika ada nilai beban kerja
+    hasilIdentifikasi.style.display = 'block';
   } else {
-    hasilIdentifikasi.style.display = 'none'; // Menyembunyikan div jika tidak ada nilai beban kerja
+    hasilIdentifikasi.style.display = 'none';
   }
 }
 
-// Fungsi untuk validasi apakah form profil pekerja
+// Fungsi untuk validasi apakah form profil pekerja terisi
 function hitungMetabolismeBasal() {
   var jenisKelamin = document.getElementById("jenisKelamin").value;
   var beratBadan = document.getElementById("beratBadan").value;
@@ -252,6 +262,7 @@ function cariMetabolismeBasal() {
   document.getElementById("nilaiMetabolismeBasal").textContent =
     nilaiMetabolismeBasal || "Input salah";
 
+  // Menampilkan informasi jika terdapat sebuah nilai pada nilai metabolisme basal
   var hasilIdentifikasi = document.getElementById("hasilPerhitunganMetabolismeBasal");
   if (hasilIdentifikasi) {
     hasilIdentifikasi.style.display = 'block';
@@ -259,3 +270,30 @@ function cariMetabolismeBasal() {
     hasilIdentifikasi.style.display = 'none';
   }
 }
+
+// Fungsi untuk menduplikasi form beban kerja
+function duplikatCard() {
+  const container = document.querySelector('#cardBebanKerja'); // Selector untuk container card
+  const originalCard = container.querySelector('.card'); // Selector untuk card yang akan diduplikasi
+  const cardClone = originalCard.cloneNode(true); // Duplikasi card
+  
+  const cardCount = container.querySelectorAll('.card').length + 1;
+  cardClone.id = `bebanKerja${cardCount}`; // Menetapkan ID unik untuk card baru
+  
+  // Update ID untuk setiap elemen di dalam card
+  const elementsToUpdate = cardClone.querySelectorAll('[id]');
+  elementsToUpdate.forEach(element => {
+    const newId = element.id.replace(/\d+$/, '') + cardCount;
+    element.id = newId;
+  });
+  
+  // Update judul card
+  const cardTitle = cardClone.querySelector('.card-title');
+  if (cardTitle) cardTitle.textContent = `Beban Kerja ${cardCount}`;
+  
+  // Tambahkan card baru ke container
+  container.appendChild(cardClone);
+  
+  // Re-inisialisasi event listener atau fungsi pada card baru jika diperlukan
+}
+
