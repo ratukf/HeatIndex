@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beban Kerja 1 Form</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <h1>Kalkulator Kebutuhan Kalori</h1>
+    </div>
+
+    <!-- Container card beban kerja -->
+    <div class="container mt-5 mb-5" id="containerBebanKerja">
+      <div class="card custom-card shadow p-5">
+        <div class="card-body">
+          <h2 class="mb-4" id="cardTitle">Beban Kerja 1</h2>
+
+          <!-- Form -->
+          <form id="formBebanKerja">
+            <div class="row">
+              <div class="col-md-4">
+                <label for="jenisPekerjaan" class="form-label"
+                  >Jenis Pekerjaan</label
+                >
+                <select class="form-select" id="jenisPekerjaan" required>
+                  <option value="" selected disabled>
+                    Pilih jenis pekerjaan
+                  </option>
+                  <option value="1" title="Pekerjaan dengan tangan">1</option>
+                  <option value="2" title="Pekerjaan dengan satu tangan">
+                    2
+                  </option>
+                  <option value="3" title="Pekerjaan dengan dua lengan">
+                    3
+                  </option>
+                  <option
+                    value="4"
+                    title="Pekerjaan dengan menggunakan gerakan tangan"
+                  >
+                    4
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="kategoriPekerjaan" class="form-label"
+                  >Kategori Pekerjaan</label
+                >
+                <select class="form-select" id="kategoriPekerjaan" required>
+                  <option value="" selected disabled>
+                    Pilih kategori pekerjaan
+                  </option>
+                  <option value="I">I</option>
+                  <option value="II">II</option>
+                  <option value="III">III</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="posisiKerja" class="form-label">Posisi Kerja</label>
+                <select class="form-select" id="posisiKerja" required>
+                  <option value="" selected disabled>Pilih posisi kerja</option>
+                  <option value="duduk">Duduk</option>
+                  <option value="berdiri">Berdiri</option>
+                  <option value="berjalan">Berjalan</option>
+                  <option value="berjalanmendaki">Berjalan mendaki</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Button identifikasi beban kerja -->
+            <div class="row mb-3 mt-3">
+              <div class="col-md-4">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="identifikasiNilaiBebanKerja()"
+                >
+                  Identifikasi nilai indeks beban kerja
+                </button>
+              </div>
+            </div>
+
+            <!-- Hasil identifikasi beban kerja -->
+            <div class="row" id="hasilIdentifikasiNilaiBebanKerja" style="display: none;">
+              <div class="col-md-12">
+                <div class="mb-3">
+                    <h5>Jenis pekerjaan: <span id="jenisPekerjaanText"></span></h5>
+                    <h5>Kategori pekerjaan: Kategori <span id="kategoriPekerjaanText"></span></h5>
+                    <h5>Posisi Badan: <span id="posisiKerjaText"></span></h5>
+                    <h5>Contoh pekerjaan: <span id="contohPekerjaanText"></span></h5>
+                    <h5>Nilai indeks beban kerja: <span id="indeksBebanKerjaText"></span>
+                  </h5>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form profil pekerja & waktu kerja -->
+            <div class="row">
+              <div class="col-md-4">
+                <label for="jenisKelamin" class="form-label"
+                  >Jenis Kelamin</label
+                >
+                <select class="form-select" id="jenisKelamin" required>
+                  <option value="" selected disabled>
+                    Pilih jenis kelamin pekerja
+                  </option>
+                  <option value="lakiLaki">Laki-laki</option>
+                  <option value="perempuan">Perempuan</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="beratBadan" class="form-label"
+                  >Berat Badan (kg)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="beratBadan"
+                  placeholder="Masukan berat badan pekerja (kg)"
+                  required
+                />
+              </div>
+              <div class="col-md-4">
+                <label for="waktuKerja" class="form-label"
+                  >Waktu kerja (menit)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="waktuKerja"
+                  placeholder="Masukan waktu kerja (menit)"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Button hitung metabolisme basal pekerja -->
+            <div class="row mb-3 mt-3">
+              <div class="col-md-4">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="hitungMetabolismeBasal()"
+                >
+                  Hitung metabolisme basal pekerja
+                </button>
+              </div>
+            </div>
+
+            <!-- Hasil perhitunganmetabolisme basal pekerja -->
+            <div class="row" id="hasilPerhitunganMetabolismeBasal" style="display: none;">
+                <div class="col-md-12">
+                  <div class="mb-3">
+                    <h5 id="metabolismeBasal">
+                      Metabolisme basal:
+                      <span id="nilaiMetabolismeBasal"></span><span> kkal/jam</span>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+      <div class="mt-4">
+        <a href="../index.html" class="btn btn-primary" role="button">Kembali ke home</a>
+      </div>
+    </div>
+
+
+    <!-- Javascript -->
+    <script src="script.js"></script>
+  </body>
+</html>
