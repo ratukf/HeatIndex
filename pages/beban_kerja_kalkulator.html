@@ -24,6 +24,49 @@
 
     <!-- Container card beban kerja -->
     <div class="container mt-5 mb-5" id="containerBebanKerja">
+      <div id="cardProfilPekerja">
+        <div class="card shadow p-5 mt-4">
+          <div class="card-body">
+            <div class="row">
+              <h2 class="mb-4">Profil Pekerja</h2>
+            </div>
+            <form id="formProfilPekerja">
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  <label for="jenisKelamin" class="form-label"
+                    >Jenis Kelamin</label
+                  >
+                  <select
+                    class="jenisKelamin form-select"
+                    id="jenisKelamin"
+                    required
+                  >
+                    <option value="" selected disabled>
+                      Pilih jenis kelamin pekerja
+                    </option>
+                    <option value="lakiLaki">Laki-laki</option>
+                    <option value="perempuan">Perempuan</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  <label for="beratBadan" class="form-label"
+                    >Berat Badan (kg)</label
+                  >
+                  <input
+                    type="number"
+                    class="beratBadan form-control"
+                    id="beratBadan"
+                    placeholder="Masukan berat badan pekerja (kg)"
+                    required
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
       <div id="cardBebanKerja">
         <div class="card custom-card shadow p-5 mt-4">
           <div class="card-body">
@@ -34,7 +77,7 @@
             <!-- Form -->
             <form id="formBebanKerja">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="jenisPekerjaan" class="form-label"
                     >Jenis Pekerjaan</label
                   >
@@ -61,7 +104,7 @@
                     </option>
                   </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="kategoriPekerjaan" class="form-label"
                     >Kategori Pekerjaan</label
                   >
@@ -78,7 +121,7 @@
                     <option value="III">III</option>
                   </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="posisiKerja" class="form-label"
                     >Posisi Kerja</label
                   >
@@ -96,47 +139,15 @@
                     <option value="berjalanmendaki">Berjalan mendaki</option>
                   </select>
                 </div>
-              </div>
-
-              <!-- Form profil pekerja & waktu kerja -->
-              <div class="row mt-4">
-                <div class="col-md-4">
-                  <label for="jenisKelamin" class="form-label"
-                    >Jenis Kelamin</label
-                  >
-                  <select
-                    class="jenisKelamin form-select"
-                    id="jenisKelamin"
-                    required
-                  >
-                    <option value="" selected disabled>
-                      Pilih jenis kelamin pekerja
-                    </option>
-                    <option value="lakiLaki">Laki-laki</option>
-                    <option value="perempuan">Perempuan</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="beratBadan" class="form-label"
-                    >Berat Badan (kg)</label
-                  >
-                  <input
-                    type="number"
-                    class="beratBadan form-control"
-                    id="beratBadan"
-                    placeholder="Masukan berat badan pekerja (kg)"
-                    required
-                  />
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="waktuKerja" class="form-label"
                     >Waktu kerja (menit)</label
                   >
                   <input
                     type="number"
-                    class="beratBadan form-control"
+                    class="waktuKerja form-control"
                     id="waktuKerja"
-                    placeholder="Masukan waktu kerja (menit)"
+                    placeholder="Masukan waktu kerja"
                     required
                   />
                 </div>
@@ -177,22 +188,23 @@
             type="submit"
             class="btn btn-primary"
             id="ratarataKalori"
-            onclick="hitungBebanKerjaRataRata()"
+            onclick="validasiInput()"
           >
             Hitung beban kerja rata-rata
           </button>
         </div>
       </div>
-      
-    <div class="row mt-4 mb-4">
-      <h6>Untuk developer:
-      </h6>
-      <span id="infoBK">Hasil identifikasi beban kerja: </span>
-    </div>
-    </div>
 
+      <div class="row mt-4 mb-4">
+        <h4>Untuk developer:</h4>
+        <h6>Array beban kerja: <span id="infoBK"></span></h6>
+        <h6>Jenis kelamin: <span id="infoJenisKelamin"></span></h6>
+        <h6>Berat badan: <span id="infoBeratBadan"> kg </span></h6>
+        <h6>Array waktu kerja: <span id="infoWaktuKerja"></span></h6>
+      </div>
+    </div>
 
     <!-- Javascript -->
-    <script src="../script/kalori.js"></script>
+    <script src="../script/beban_kerja_kalkulator.js"></script>
   </body>
 </html>

@@ -184,20 +184,21 @@ function perbaruiJudulCard() {
   });
 }
 
-function hitungBebanKerjaRataRata() {
+// Fungsi untuk memvalidasi apakah semua form telah terisi
+function validasiInput() {
     var inputs = document.querySelectorAll(
-      "#cardBebanKerja .custom-card input[required], select[required]"
+      "#cardBebanKerja .custom-card input[required], select[required], #cardProfilPekerja .card input[required], select[required]"
     );
     var total = 0;
-    var valid = true; // Flag untuk mengecek validitas input
+    var valid = true;
   
     inputs.forEach(function (input) {
       if (!input.value) {
-        valid = false; // Jika ada input yang kosong, set valid menjadi false
-        input.classList.add("is-invalid"); // Optional: Tambahkan class untuk menandai input tidak valid
+        valid = false; 
+        input.classList.add("is-invalid"); 
       } else {
         total += Number(input.value);
-        input.classList.remove("is-invalid"); // Optional: Hapus class tidak valid jika input diisi
+        input.classList.remove("is-invalid");
       }
     });
   
@@ -209,28 +210,72 @@ function hitungBebanKerjaRataRata() {
     
   }
   
-// Fungsi untuk mengidentifikasi nilai indeks beban kerja
+// Fungsi untuk mengidentifikasi nilai indeks beban kerja dan menyimpannya dalam array
 function hitungBK() {
-  // Melakukan pencarian berdasarkan jenisPekerjaan
-  var jenisPekerjaanInput = document.getElementById('jenisPekerjaan').value;
-  var kategoriPekerjaanInput = document.getElementById('kategoriPekerjaan').value;
-  var posisiKerjaInput = document.getElementById('posisiKerja').value;
+  var semuaCard = document.querySelectorAll('.custom-card');
+  var bebanKerjaArray = [];
+  
+  semuaCard.forEach(function(card) {
+    var jenisPekerjaanInput = card.querySelector('.jenisPekerjaan').value;
+    var kategoriPekerjaanInput = card.querySelector('.kategoriPekerjaan').value;
+    var posisiKerjaInput = card.querySelector('.posisiKerja').value;
+    
+    var jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(jenis => jenis.nama === jenisPekerjaanInput);
+    if (!jenisPekerjaanFound) {
+      console.error("Jenis pekerjaan tidak ditemukan.");
+      return;
+    }
 
-  const jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(jenis => jenis.nama === jenisPekerjaanInput);
-  if (!jenisPekerjaanFound) {
-      return "Jenis pekerjaan tidak ditemukan.";
-  }
+    var kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(kategori => kategori.nama === kategoriPekerjaanInput);
+    if (!kategoriPekerjaanFound) {
+      console.error("Kategori pekerjaan tidak ditemukan.");
+      return;
+    }
 
-  const kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(kategori => kategori.nama === kategoriPekerjaanInput);
-  if (!kategoriPekerjaanFound) {
-      return "Kategori pekerjaan tidak ditemukan.";
-  }
+    var nilaiBebanKerja = kategoriPekerjaanFound.posisiKerja[posisiKerjaInput];
+    if (!nilaiBebanKerja) {
+      console.error("Posisi kerja tidak ditemukan.");
+      return;
+    }
 
-  const nilaiBebanKerja = kategoriPekerjaanFound.posisiKerja[posisiKerjaInput];
-  if (!nilaiBebanKerja) {
-      return "Posisi kerja tidak ditemukan.";
-  }
+    bebanKerjaArray.push(nilaiBebanKerja);
+  });
 
-  console.log(nilaiBebanKerja);
+  console.log(bebanKerjaArray);
+  document.getElementById('infoBK').textContent = bebanKerjaArray.join(', ');
+  simpanDataProfil();
 }
+
+// Fungsi untuk menyimpan data profil pekerja 
+
+function simpanDataProfil() {
+  var inputJenisKelamin = document.getElementById('jenisKelamin').value;
+  var inputBeratBadan = document.getElementById('beratBadan').value;
+
+  document.getElementById('infoJenisKelamin').textContent = inputJenisKelamin;
+  document.getElementById('infoBeratBadan').textContent = inputBeratBadan;
+
+  simpanDataWaktu();
+}
+
+// Fungsi untuk menyimpan data waktu kerja dalam array
+function simpanDataWaktu() {
+  var waktuKerjaArray = [];
+  var cards = document.querySelectorAll('.custom-card');
+
+  cards.forEach(function(card) {
+      var waktuKerja = card.querySelector('.waktuKerja').value;
+      waktuKerjaArray.push(waktuKerja);
+  });
+
+  // Menyimpan atau menampilkan data
+  console.log(waktuKerjaArray);
+
+  document.getElementById('infoWaktuKerja').textContent = waktuKerjaArray.join(', ');
+}
+
+
+
+
+
 
