@@ -161,7 +161,6 @@ function duplikatCard() {
   buttonHapus.innerText = "Hapus";
   buttonHapus.setAttribute("onclick", "hapusCardIni(this)");
   cardDuplikat.appendChild(buttonHapus);
-
   container.appendChild(cardDuplikat);
 }
 
@@ -216,13 +215,14 @@ var waktuKerjaArray = [];
 // Fungsi untuk mengidentifikasi nilai indeks beban kerja dan menyimpannya dalam array
 function hitungBK() {
   var semuaCard = document.querySelectorAll(".custom-card");
-  bebanKerjaArray = []; // Reset array untuk memastikan data selalu baru
+  bebanKerjaArray = [];
 
   semuaCard.forEach(function (card) {
     var jenisPekerjaanInput = card.querySelector(".jenisPekerjaan").value;
     var kategoriPekerjaanInput = card.querySelector(".kategoriPekerjaan").value;
     var posisiKerjaInput = card.querySelector(".posisiKerja").value;
 
+    // Mencari jenis pekerjaan yang sesuai di dalam data
     var jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(
       (jenis) => jenis.nama === jenisPekerjaanInput
     );
@@ -231,6 +231,7 @@ function hitungBK() {
       return;
     }
 
+    // Mencari kategori pekerjaan yang sesuai di dalam data
     var kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(
       (kategori) => kategori.nama === kategoriPekerjaanInput
     );
@@ -239,13 +240,14 @@ function hitungBK() {
       return;
     }
 
+    // Mencari posisi kerja yang sesuai di dalam data
     var nilaiBebanKerja = kategoriPekerjaanFound.posisiKerja[posisiKerjaInput];
     if (!nilaiBebanKerja) {
       console.error("Posisi kerja tidak ditemukan.");
       return;
     }
 
-    console.log('BK: ' + nilaiBebanKerja);
+    console.log("BK: " + nilaiBebanKerja);
     bebanKerjaArray.push(nilaiBebanKerja);
   });
 
@@ -254,7 +256,7 @@ function hitungBK() {
   simpanDataProfil();
 }
 
-// Fungsi untuk menyimpan data profil pekerja
+// Fungsi untuk menyimpan data profil pekerja (jenis kelamin dan berat badan)
 function simpanDataProfil() {
   var inputJenisKelamin = document.getElementById("jenisKelamin").value;
   var inputBeratBadan = document.getElementById("beratBadan").value;
@@ -268,7 +270,7 @@ function simpanDataProfil() {
 
 // Fungsi untuk menyimpan data waktu kerja dalam array dan menjumlahkannya
 function simpanDataWaktu() {
-  waktuKerjaArray = []; // Reset array untuk memastikan data selalu baru
+  waktuKerjaArray = [];
   var totalWaktuKerja = 0;
   var cards = document.querySelectorAll(".custom-card");
 
@@ -317,45 +319,42 @@ function hitungBKRataRata() {
   for (let i = 0; i < bebanKerjaArray.length; i++) {
     totalBK += bebanKerjaArray[i] * waktuKerjaArray[i];
     BK = bebanKerjaArray[i] * waktuKerjaArray[i];
-    console.log('Beban kerja ke-' + i + ": " + bebanKerjaArray[i]);
-    console.log('Waktu ke-' + i + ': ' + waktuKerjaArray[i]);
-    console.log('Hasil BK x T: ' + BK);
+    console.log("Beban kerja ke-" + i + ": " + bebanKerjaArray[i]);
+    console.log("Waktu ke-" + i + ": " + waktuKerjaArray[i]);
+    console.log("Hasil BK x T: " + BK);
   }
 
   let BK_RataRata = (totalBK * 60) / totalWaktuKerja;
 
-  console.log('Total waktu kerja: ' + totalWaktuKerja);
+  console.log("Total waktu kerja: " + totalWaktuKerja);
   // Opsi untuk membulatkan nilai BK_RataRata jika diperlukan
   BK_RataRata = BK_RataRata.toFixed(2); // Membulatkan ke dua desimal
 
   document.getElementById("rataRataBKText").textContent =
     BK_RataRata + " kkal/jam";
 
-  console.log('Waktu kerja array: ' + waktuKerjaArray + ' menit');
-  console.log('TotalBK: ' + totalBK + ' kkal/jam');
-  console.log('Total waktu kerja: ' + totalWaktuKerja + ' menit');
-  console.log('BK rata-rata: ' + BK_RataRata);
+  console.log("Waktu kerja array: " + waktuKerjaArray + " menit");
+  console.log("TotalBK: " + totalBK + " kkal/jam");
+  console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
+  console.log("BK rata-rata: " + BK_RataRata);
 
-  var massa = document.getElementById('beratBadan').value;
-  var jenisKelamin = document.getElementById('jenisKelamin').value;
+  var massa = document.getElementById("beratBadan").value;
+  var jenisKelamin = document.getElementById("jenisKelamin").value;
   var kkalLakiLaki = 1;
   var kkalPerempuan = 0.9;
   let mb = 0;
 
-  if (jenisKelamin == 'lakiLaki') {
+  if (jenisKelamin == "lakiLaki") {
     mb = massa * kkalLakiLaki;
   } else {
     mb = massa * kkalPerempuan;
   }
 
-
   let BK_RataRataNumber = parseFloat(BK_RataRata); // Konversi ke Number jika diperlukan
   let mbNumber = parseFloat(mb); // Konversi ke Number jika diperlukan
-  
+
   let totalBKRataRata = (BK_RataRataNumber + mbNumber).toFixed(2); // Lakukan penambahan dan konversi ke string dengan 2 angka desimal
-  
-  console.log('Total BK rata-rata: '+ totalBKRataRata);
-  document.getElementById('BKText').textContent = totalBKRataRata + ' kkal/jam';
 
-
+  console.log("Total BK rata-rata: " + totalBKRataRata);
+  document.getElementById("BKText").textContent = totalBKRataRata + " kkal/jam";
 }
