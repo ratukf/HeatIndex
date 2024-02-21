@@ -186,47 +186,54 @@ function perbaruiJudulCard() {
 
 // Fungsi untuk memvalidasi apakah semua form telah terisi
 function validasiInput() {
-    var inputs = document.querySelectorAll(
-      "#cardBebanKerja .custom-card input[required], select[required], #cardProfilPekerja .card input[required], select[required]"
-    );
-    var total = 0;
-    var valid = true;
-  
-    inputs.forEach(function (input) {
-      if (!input.value) {
-        valid = false; 
-        input.classList.add("is-invalid"); 
-      } else {
-        total += Number(input.value);
-        input.classList.remove("is-invalid");
-      }
-    });
-  
-    if (!valid) {
-      alert("Semua kolom harus diisi.");
-      return;
+  var inputs = document.querySelectorAll(
+    "#cardBebanKerja .custom-card input[required], select[required], #cardProfilPekerja .card input[required], select[required]"
+  );
+  var total = 0;
+  var valid = true;
+
+  inputs.forEach(function (input) {
+    if (!input.value) {
+      valid = false;
+      input.classList.add("is-invalid");
+    } else {
+      total += Number(input.value);
+      input.classList.remove("is-invalid");
     }
-    hitungBK();
-    
+  });
+
+  if (!valid) {
+    alert("Semua kolom harus diisi.");
+    return;
   }
-  
+  hitungBK();
+}
+
+// Definisikan bebanKerjaArray dan waktuKerjaArray sebagai variabel global
+var bebanKerjaArray = [];
+var waktuKerjaArray = [];
+
 // Fungsi untuk mengidentifikasi nilai indeks beban kerja dan menyimpannya dalam array
 function hitungBK() {
-  var semuaCard = document.querySelectorAll('.custom-card');
-  var bebanKerjaArray = [];
-  
-  semuaCard.forEach(function(card) {
-    var jenisPekerjaanInput = card.querySelector('.jenisPekerjaan').value;
-    var kategoriPekerjaanInput = card.querySelector('.kategoriPekerjaan').value;
-    var posisiKerjaInput = card.querySelector('.posisiKerja').value;
-    
-    var jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(jenis => jenis.nama === jenisPekerjaanInput);
+  var semuaCard = document.querySelectorAll(".custom-card");
+  bebanKerjaArray = []; // Reset array untuk memastikan data selalu baru
+
+  semuaCard.forEach(function (card) {
+    var jenisPekerjaanInput = card.querySelector(".jenisPekerjaan").value;
+    var kategoriPekerjaanInput = card.querySelector(".kategoriPekerjaan").value;
+    var posisiKerjaInput = card.querySelector(".posisiKerja").value;
+
+    var jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(
+      (jenis) => jenis.nama === jenisPekerjaanInput
+    );
     if (!jenisPekerjaanFound) {
       console.error("Jenis pekerjaan tidak ditemukan.");
       return;
     }
 
-    var kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(kategori => kategori.nama === kategoriPekerjaanInput);
+    var kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(
+      (kategori) => kategori.nama === kategoriPekerjaanInput
+    );
     if (!kategoriPekerjaanFound) {
       console.error("Kategori pekerjaan tidak ditemukan.");
       return;
@@ -238,44 +245,117 @@ function hitungBK() {
       return;
     }
 
+    console.log('BK: ' + nilaiBebanKerja);
     bebanKerjaArray.push(nilaiBebanKerja);
   });
 
   console.log(bebanKerjaArray);
-  document.getElementById('infoBK').textContent = bebanKerjaArray.join(', ');
+  document.getElementById("infoBK").textContent = bebanKerjaArray.join(", ");
   simpanDataProfil();
 }
 
-// Fungsi untuk menyimpan data profil pekerja 
-
+// Fungsi untuk menyimpan data profil pekerja
 function simpanDataProfil() {
-  var inputJenisKelamin = document.getElementById('jenisKelamin').value;
-  var inputBeratBadan = document.getElementById('beratBadan').value;
+  var inputJenisKelamin = document.getElementById("jenisKelamin").value;
+  var inputBeratBadan = document.getElementById("beratBadan").value;
 
-  document.getElementById('infoJenisKelamin').textContent = inputJenisKelamin;
-  document.getElementById('infoBeratBadan').textContent = inputBeratBadan;
+  document.getElementById("infoJenisKelamin").textContent = inputJenisKelamin;
+  document.getElementById("infoBeratBadan").textContent =
+    inputBeratBadan + " kg";
 
   simpanDataWaktu();
 }
 
-// Fungsi untuk menyimpan data waktu kerja dalam array
+// Fungsi untuk menyimpan data waktu kerja dalam array dan menjumlahkannya
 function simpanDataWaktu() {
-  var waktuKerjaArray = [];
-  var cards = document.querySelectorAll('.custom-card');
+  waktuKerjaArray = []; // Reset array untuk memastikan data selalu baru
+  var totalWaktuKerja = 0;
+  var cards = document.querySelectorAll(".custom-card");
 
-  cards.forEach(function(card) {
-      var waktuKerja = card.querySelector('.waktuKerja').value;
-      waktuKerjaArray.push(waktuKerja);
+  cards.forEach(function (card) {
+    var waktuKerja = parseInt(card.querySelector(".waktuKerja").value);
+    waktuKerjaArray.push(waktuKerja);
   });
 
-  // Menyimpan atau menampilkan data
-  console.log(waktuKerjaArray);
+  waktuKerjaArray.forEach((num) => {
+    totalWaktuKerja += num;
+  });
+  console.log("Array waktu kerja: " + waktuKerjaArray);
+  console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
 
-  document.getElementById('infoWaktuKerja').textContent = waktuKerjaArray.join(', ');
+  document.getElementById("infoWaktuKerja").textContent =
+    waktuKerjaArray.join(", ");
+  document.getElementById("totalWaktuText").textContent =
+    totalWaktuKerja + " menit";
+
+  hitungBKRataRata();
 }
 
+// Fungsi untuk menghitung BK rata-rata dan total beban kerja
+function hitungBKRataRata() {
+  if (bebanKerjaArray.length !== waktuKerjaArray.length) {
+    console.error("Panjang array tidak cocok.");
+    return;
+  }
+
+  waktuKerjaArray = []; // Reset array untuk memastikan data selalu baru
+  var totalWaktuKerja = 0;
+  var cards = document.querySelectorAll(".custom-card");
+
+  cards.forEach(function (card) {
+    var waktuKerja = parseInt(card.querySelector(".waktuKerja").value);
+    waktuKerjaArray.push(waktuKerja);
+  });
+
+  waktuKerjaArray.forEach((num) => {
+    totalWaktuKerja += num;
+  });
+
+  let totalBK = 0;
+  let BK = 0;
+
+  for (let i = 0; i < bebanKerjaArray.length; i++) {
+    totalBK += bebanKerjaArray[i] * waktuKerjaArray[i];
+    BK = bebanKerjaArray[i] * waktuKerjaArray[i];
+    console.log('Beban kerja ke-' + i + ": " + bebanKerjaArray[i]);
+    console.log('Waktu ke-' + i + ': ' + waktuKerjaArray[i]);
+    console.log('Hasil BK x T: ' + BK);
+  }
+
+  let BK_RataRata = (totalBK * 60) / totalWaktuKerja;
+
+  console.log('Total waktu kerja: ' + totalWaktuKerja);
+  // Opsi untuk membulatkan nilai BK_RataRata jika diperlukan
+  BK_RataRata = BK_RataRata.toFixed(2); // Membulatkan ke dua desimal
+
+  document.getElementById("rataRataBKText").textContent =
+    BK_RataRata + " kkal/jam";
+
+  console.log('Waktu kerja array: ' + waktuKerjaArray + ' menit');
+  console.log('TotalBK: ' + totalBK + ' kkal/jam');
+  console.log('Total waktu kerja: ' + totalWaktuKerja + ' menit');
+  console.log('BK rata-rata: ' + BK_RataRata);
+
+  var massa = document.getElementById('beratBadan').value;
+  var jenisKelamin = document.getElementById('jenisKelamin').value;
+  var kkalLakiLaki = 1;
+  var kkalPerempuan = 0.9;
+  let mb = 0;
+
+  if (jenisKelamin == 'lakiLaki') {
+    mb = massa * kkalLakiLaki;
+  } else {
+    mb = massa * kkalPerempuan;
+  }
 
 
+  let BK_RataRataNumber = parseFloat(BK_RataRata); // Konversi ke Number jika diperlukan
+  let mbNumber = parseFloat(mb); // Konversi ke Number jika diperlukan
+  
+  let totalBKRataRata = (BK_RataRataNumber + mbNumber).toFixed(2); // Lakukan penambahan dan konversi ke string dengan 2 angka desimal
+  
+  console.log('Total BK rata-rata: '+ totalBKRataRata);
+  document.getElementById('BKText').textContent = totalBKRataRata + ' kkal/jam';
 
 
-
+}

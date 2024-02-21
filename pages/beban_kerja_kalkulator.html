@@ -18,14 +18,14 @@
   </head>
 
   <body>
-    <div class="container mt-5">
+    <div class="container p-5">
       <h1>Kalkulator Beban Kerja</h1>
     </div>
 
     <!-- Container card beban kerja -->
-    <div class="container mt-5 mb-5" id="containerBebanKerja">
+    <div class="container" id="containerBebanKerja">
       <div id="cardProfilPekerja">
-        <div class="card shadow p-5 mt-4">
+        <div class="card shadow p-5">
           <div class="card-body">
             <div class="row">
               <h2 class="mb-4">Profil Pekerja</h2>
@@ -49,7 +49,7 @@
                   </select>
                 </div>
               </div>
-              <div class="row mb-4">
+              <div class="row">
                 <div class="col-md-4">
                   <label for="beratBadan" class="form-label"
                     >Berat Badan (kg)</label
@@ -176,22 +176,24 @@
       </div>
 
       <!-- Button home -->
-      <div class="row">
-        <div class="col-md-4 mt-4">
-          <a href="../index.html" class="btn btn-primary" role="button"
-            >Kembali ke home</a
-          >
-        </div>
-        <div class="col-md-4"></div>
-        <div class="col-md-4 text-end">
+      <div class="row mt-4">
+        <div class="col-md-12 mt-4 text-center">
           <button
             type="submit"
             class="btn btn-primary"
             id="ratarataKalori"
             onclick="validasiInput()"
+            style="font-size: 1.5rem"
           >
             Hitung beban kerja rata-rata
           </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mt-4">
+          <a href="../index.html" class="btn btn-primary" role="button"
+            >Kembali ke home</a
+          >
         </div>
       </div>
 
@@ -199,9 +201,25 @@
         <h4>Untuk developer:</h4>
         <h6>Array beban kerja: <span id="infoBK"></span></h6>
         <h6>Jenis kelamin: <span id="infoJenisKelamin"></span></h6>
-        <h6>Berat badan: <span id="infoBeratBadan"> kg </span></h6>
+        <h6>Berat badan: <span id="infoBeratBadan"></span></h6>
         <h6>Array waktu kerja: <span id="infoWaktuKerja"></span></h6>
       </div>
+    </div>
+
+    <div class="container mb-4" id="containerHasil">
+      <div class="card">
+        <div class="card-body shadow p-4">
+          <div class="row mt-4 text-center">
+            <h4>Hasil perhitungan beban kerja:</h4>
+          </div> 
+          <div class="row mt-4 text-center">
+            <h6>Beban kerja rata-rata: <span id="rataRataBKText"></span></h6>
+            <h6>Total beban kerja: <span id="BKText"></span></h6>
+            <h6>Total waktu kerja: <span id="totalWaktuText"></span></h6>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Javascript -->
