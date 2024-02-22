@@ -181,6 +181,9 @@ function nextPage() {
   if (!jenisKelamin || !beratBadan) {
     alert("Harap isi seluruh form.");
   } else {
+    document.getElementById("infoJenisKelamin").textContent = jenisKelamin;
+    document.getElementById("infoBeratBadan").textContent =
+      beratBadan + " kg";
     // Tambahkan jeda 1 detik
     setTimeout(function () {
       // Menggunakan jQuery untuk transisi menghilang secara perlahan
@@ -192,9 +195,81 @@ function nextPage() {
   }
 }
 
+// Fungsi untuk menduplikat card
+function duplikatCard() {
+  var container = document.getElementById("cardBebanKerja");
+  var cardAsli = document.querySelector(".card.custom-card.shadow.p-5.mt-4");
+  var cardDuplikat = cardAsli.cloneNode(true);
+
+  // Mengatur judul untuk card baru berdasarkan jumlah card yang ada
+  var jumlahCard = container.getElementsByClassName("card").length + 1;
+  cardDuplikat.querySelector(".cardTitle").innerText =
+    "Beban Kerja " + jumlahCard;
+
+  // Menambahkan button hapus pada card baru
+  var buttonHapus = document.createElement("button");
+  buttonHapus.classList.add("btn", "btn-danger", "btn-sm");
+  buttonHapus.innerText = "Hapus";
+  buttonHapus.setAttribute("onclick", "hapusCardIni(this)");
+  cardDuplikat.appendChild(buttonHapus);
+  container.appendChild(cardDuplikat);
+}
+
+// Fungsi untuk menghapus card
+function hapusCardIni(element) {
+  var container = document.getElementById("cardBebanKerja");
+  var cardYangAkanDihapus = element.closest(".card.custom-card");
+  container.removeChild(cardYangAkanDihapus);
+  perbaruiJudulCard();
+}
+
+// Fungsi untuk memperbarui judul pada semua card
+function perbaruiJudulCard() {
+  var semuaCard = document.querySelectorAll(
+    "#cardBebanKerja .card.custom-card"
+  );
+  semuaCard.forEach((card, index) => {
+    var judulCard = card.querySelector(".cardTitle");
+    judulCard.innerText = "Beban Kerja " + (index + 1);
+  });
+}
+
 // Definisikan variabel global
 var bebanKerjaArray = [];
 var waktuKerjaArray = [];
+
+// Fungsi untuk memvalidasi apakah semua form telah terisi
+function validasiInput() {
+  var inputs = document.querySelectorAll(
+    ".kalkulatorBebanKerja input[required], select[required]"
+  );
+  var total = 0;
+  var valid = true;
+
+  inputs.forEach(function (input) {
+    if (!input.value) {
+      valid = false;
+      input.classList.add("is-invalid");
+    } else {
+      total += Number(input.value);
+      input.classList.remove("is-invalid");
+    }
+  });
+
+  if (!valid) {
+    alert("Semua kolom harus diisi.");
+    return;
+  }
+
+  setTimeout(function () {
+    // Menggunakan jQuery untuk transisi menghilang secara perlahan
+    $("#bebanKerja").fadeOut("slow", function () {
+      $("#containerHasil").fadeIn("slow");
+    });
+  }, 500); // Jeda waktu 1000 milidetik (1 detik)
+
+  hitungBK();
+}
 
 // Fungsi untuk mengidentifikasi nilai indeks beban kerja dan menyimpannya dalam array
 function hitungBK() {
@@ -237,83 +312,7 @@ function hitungBK() {
 
   console.log(bebanKerjaArray);
   document.getElementById("infoBK").textContent = bebanKerjaArray.join(", ");
-  simpanDataProfil();
-}
-
-// Fungsi untuk menyimpan data profil pekerja (jenis kelamin dan berat badan)
-function simpanDataProfil() {
-  var inputJenisKelamin = document.getElementById("jenisKelamin").value;
-  var inputBeratBadan = document.getElementById("beratBadan").value;
-
-  document.getElementById("infoJenisKelamin").textContent = inputJenisKelamin;
-  document.getElementById("infoBeratBadan").textContent =
-    inputBeratBadan + " kg";
-
   simpanDataWaktu();
-}
-
-// Fungsi untuk menduplikat card
-function duplikatCard() {
-  var container = document.getElementById("cardBebanKerja");
-  var cardAsli = document.querySelector(".card.custom-card.shadow.p-5.mt-4");
-  var cardDuplikat = cardAsli.cloneNode(true);
-
-  // Mengatur judul untuk card baru berdasarkan jumlah card yang ada
-  var jumlahCard = container.getElementsByClassName("card").length + 1;
-  cardDuplikat.querySelector(".cardTitle").innerText =
-    "Beban Kerja " + jumlahCard;
-
-  // Menambahkan button hapus pada card baru
-  var buttonHapus = document.createElement("button");
-  buttonHapus.classList.add("btn", "btn-danger", "btn-sm");
-  buttonHapus.innerText = "Hapus";
-  buttonHapus.setAttribute("onclick", "hapusCardIni(this)");
-  cardDuplikat.appendChild(buttonHapus);
-  container.appendChild(cardDuplikat);
-}
-
-// Fungsi untuk menghapus card
-function hapusCardIni(element) {
-  var container = document.getElementById("cardBebanKerja");
-  var cardYangAkanDihapus = element.closest(".card.custom-card");
-  container.removeChild(cardYangAkanDihapus);
-  perbaruiJudulCard();
-}
-
-// Fungsi untuk memperbarui judul pada semua card
-function perbaruiJudulCard() {
-  var semuaCard = document.querySelectorAll(
-    "#cardBebanKerja .card.custom-card"
-  );
-  semuaCard.forEach((card, index) => {
-    var judulCard = card.querySelector(".cardTitle");
-    judulCard.innerText = "Beban Kerja " + (index + 1);
-  });
-}
-
-// Fungsi untuk memvalidasi apakah semua form telah terisi
-function validasiInput() {
-  var inputs = document.querySelectorAll(
-    ".kalkulatorBebanKerja input[required], select[required]"
-  );
-  var total = 0;
-  var valid = true;
-
-  inputs.forEach(function (input) {
-    if (!input.value) {
-      valid = false;
-      input.classList.add("is-invalid");
-    } else {
-      total += Number(input.value);
-      input.classList.remove("is-invalid");
-    }
-  });
-
-  if (!valid) {
-    alert("Semua kolom harus diisi.");
-    return;
-  }
-  hitungBK();
 }
 
 // Fungsi untuk menyimpan data waktu kerja dalam array dan menjumlahkannya
@@ -383,16 +382,15 @@ function hitungBKRataRata() {
   console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
   console.log("BK rata-rata: " + BK_RataRata);
 
-  var massa = document.getElementById("beratBadan").value;
-  var jenisKelamin = document.getElementById("jenisKelamin").value;
+  var beratBadan = document.getElementById("beratBadan").value;
   var kkalLakiLaki = 1;
   var kkalPerempuan = 0.9;
   let mb = 0;
 
   if (jenisKelamin == "lakiLaki") {
-    mb = massa * kkalLakiLaki;
+    mb = beratBadan * kkalLakiLaki;
   } else {
-    mb = massa * kkalPerempuan;
+    mb = beratBadan * kkalPerempuan;
   }
 
   let BK_RataRataNumber = parseFloat(BK_RataRata); // Konversi ke Number jika diperlukan
@@ -461,13 +459,9 @@ function hitungBKRataRata() {
       "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan.";
   }
 
-  setTimeout(function () {
-    // Menggunakan jQuery untuk transisi menghilang secara perlahan
-    $("#bebanKerja").fadeOut("slow", function () {
-      // Setelah ISBB menghilang, tampilkan form profilPekerja
-      $("#containerHasil").fadeIn("slow");
-    });
-  }, 500); // Jeda waktu 1000 milidetik (1 detik)
+  hide();
+}
 
+function hide() {
   document.getElementById("profilPekerja").style.display = "none";
 }
