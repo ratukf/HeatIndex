@@ -7,8 +7,10 @@ function calculateHeatIndex() {
   var rowIndex = findIndex(heatIndexMatrix[0], humidity);
   var columnIndex = findIndex(heatIndexMatrix.map(row => row[0]), temperature);
 
-  // Jika tidak ditemukan, tampilkan pesan error
-  if (rowIndex === -1 || columnIndex === -1) {
+  // Jika form tidak diisi atau data tidak ditemukan, tampilkan pesan error
+  if (!temperature || !humidity) {
+    alert("Mohon isi seluruh form.")
+  } else if (rowIndex === -1 || columnIndex === -1) {
     alert("Data tidak valid. Silakan cek kembali nilai suhu dan kelembaban relatif.");
     return;
   }
@@ -16,26 +18,34 @@ function calculateHeatIndex() {
   // Dapatkan nilai heat index dari matriks heatIndexMatrix
   var heatIndexValue = heatIndexMatrix[columnIndex][rowIndex];
 
-  // Inisiasi variabel kategori bahaya, rekomendasi kerja:istirahat, dan kebutuhan air mineral
-  var category, recommendation, waterRequirement;
+  // Inisiasi variabel kategori bahaya, rekomendasi kerja:istirahat, kebutuhan air mineral, warna kategori, dan warna teks
+  var category, recommendation, waterRequirement, warnaHighlight, warnaTeks;
 
   // Logika untuk menentukan kategori bahaya, rekomendasi kerja:istirahat, dan kebutuhan air mineral berdasarkan nilai heat index
   if (heatIndexValue >= 52 || typeof heatIndexValue === 'string') {
     category = "Bahaya Ekstrem**";
     recommendation = "20:10";
     waterRequirement = "1 gelas setiap 10 menit";
+    warnaHighlight = "red";
+    warnaTeks = "black";
   } else if (heatIndexValue >= 39) {
     category = "Bahaya";
     recommendation = "30:10";
     waterRequirement = "1 gelas setiap 15 menit";
+    warnaHighlight = "orange";
+    warnaTeks = "black";
   } else if (heatIndexValue >= 30) {
     category = "Sangat Hati-Hati";
     recommendation = "50:10";
     waterRequirement = "1 gelas setiap 20 menit";
+    warnaHighlight = "yellow";
+    warnaTeks = "black";
   } else  {
     category = "Hati-Hati";
     recommendation = "Normal/Scheduled";
     waterRequirement = "1 gelas setiap 20 menit";
+    warnaHighlight = "green";
+    warnaTeks = "white";
   }
 
   // Tampilkan hasil dalam tabel
@@ -44,6 +54,10 @@ function calculateHeatIndex() {
   document.getElementById('resultWaterRequirement').innerText = waterRequirement;
   document.getElementById('resultHeatIndex').innerText = heatIndexValue;
   document.getElementById('bariskolom').innerText = "(Baris, kolom) data heat index: " + "(" + (columnIndex+1) + "," + (rowIndex+1) + ")";
+  document.getElementById('table').style.backgroundColor = warnaHighlight;
+  document.getElementById('table').style.color = warnaTeks;
+  document.getElementById('hasilIdentifikasi').style.display = 'block';
+
 }
 
 function findIndex(array, value) {
