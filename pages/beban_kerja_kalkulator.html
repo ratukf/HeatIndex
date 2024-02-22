@@ -16,6 +16,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   </head>
 
   <body class="kalkulatorBebanKerja">
@@ -37,12 +39,13 @@
       </div>
     </nav>
 
+    <!-- Judul webpage -->
     <div class="container text-center mb-4">
       <h2>Kalkulator Beban Kerja</h2>
     </div>
 
     <!-- Card form ISBB -->
-    <div class="ISBB">
+    <div class="ISBB" id="ISBB">
       <div class="container containerISBB mb-5 text-center">
         <div
           class="card cardISBB p-2 shadow mx-auto mb-4"
@@ -90,6 +93,7 @@
                     type="button"
                     class="btn btn-primary shadow d-block mx-auto"
                     style="width: 200px"
+                    id="tombolHitungISBB"
                     onclick="hitungIndeksSuhu()"
                   >
                     Hitung
@@ -107,7 +111,7 @@
     </div>
 
     <!-- Card form pekerja -->
-    <div class="profilPekerja">
+    <div class="profilPekerja" id="profilPekerja">
       <div class="container containerProfilPekerja mb-5 text-center">
         <div
           class="card cardProfilPekerja p-2 shadow mx-auto mb-4"
@@ -152,6 +156,7 @@
                     type="button"
                     class="btn btn-primary shadow d-block mx-auto"
                     style="width: 200px"
+                    id="tombolBerikutnya"
                     onclick="nextPage()"
                   >
                     Berikutnya
@@ -165,7 +170,7 @@
     </div>
 
     <!-- Card form beban kerja -->
-    <div class="bebanKerja mb-4">
+    <div class="bebanKerja mb-4" id="bebanKerja">
       <div class="container" id="containerBebanKerja">
         <div id="cardBebanKerja">
           <div class="card custom-card shadow p-5 mt-4">
@@ -292,22 +297,25 @@
     </div>
 
     <!-- Card hasil perhitungan beban kerja -->
-    <div class="container mb-4" id="containerHasil">
-      <div class="card">
-        <div class="card-body shadow p-4">
-          <div class="row mt-4 text-center">
-            <h4>Hasil perhitungan beban kerja:</h4>
-          </div>
-          <div class="row mt-4 text-center">
-            <h6>Total beban kerja: <span id="BKText"></span></h6>
-            <h6>Total waktu kerja: <span id="totalWaktuText"></span></h6>
-            <h6>Kategori beban kerja: <span id="kategoriBKText"></span></h6>
-            <h6>Suhu ISBB: <span id="ISBBText2"></span>&degC</h6>
-            <h6>Suhu rekomendasi maksimal untuk bekerja: <span id="suhuRekomendasiText"></span>&degC</h6>
-            <h4><span id="saran"></span></h4>
+    <div class="container mb-4" id="containerHasil" id="containerHasil">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+          <h4 class="text-center mb-4 mt-4">Hasil perhitungan beban kerja:</h4>
+          <div class="card">
+            <div class="card-body shadow p-4">
+              <div class="row text-center">
+                  <h6>Total beban kerja: <span id="BKText"></span></h6>
+                  <h6>Total waktu kerja: <span id="totalWaktuText"></span></h6>
+                  <h6>Kategori beban kerja: <span id="kategoriBKText"></span></h6>
+                  <h6>Suhu ISBB: <span id="ISBBText2"></span>&degC</h6>
+                  <h6>Suhu rekomendasi maksimal untuk bekerja: <span id="suhuRekomendasiText"></span>&degC</h6>
+                  <h4><span id="saran"></span></h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="row mt-4 mb-4">
         <h4>Untuk developer:</h4>
         <h6>Array beban kerja: <span id="infoBK"></span></h6>

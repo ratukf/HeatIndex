@@ -161,8 +161,95 @@ function hitungIndeksSuhu() {
     document.getElementById("ISBBText").textContent = suhuBolaBasah;
     document.getElementById("showISBB").style.display = "block";
     document.getElementById("ISBBText2").textContent = suhuBolaBasah;
-    return suhuBolaBasah;
+
+    // Tambahkan jeda 1 detik
+    setTimeout(function () {
+      // Menggunakan jQuery untuk transisi menghilang secara perlahan
+      $("#ISBB").fadeOut("slow", function () {
+        // Setelah ISBB menghilang, tampilkan form profilPekerja
+        $("#profilPekerja").fadeIn("slow");
+      });
+    }, 1000); // Jeda waktu 1000 milidetik (1 detik)
   }
+}
+
+// Fungsi tombol berikutnya pada form profil pekerja
+function nextPage() {
+  var jenisKelamin = document.getElementById("jenisKelamin").value;
+  var beratBadan = document.getElementById("beratBadan").value;
+
+  if (!jenisKelamin || !beratBadan) {
+    alert("Harap isi seluruh form.");
+  } else {
+    // Tambahkan jeda 1 detik
+    setTimeout(function () {
+      // Menggunakan jQuery untuk transisi menghilang secara perlahan
+      $("#profilPekerja").fadeOut("slow", function () {
+        // Setelah ISBB menghilang, tampilkan form profilPekerja
+        $("#bebanKerja").fadeIn("slow");
+      });
+    }, 500); // Jeda waktu 1000 milidetik (1 detik)
+  }
+}
+
+// Definisikan variabel global
+var bebanKerjaArray = [];
+var waktuKerjaArray = [];
+
+// Fungsi untuk mengidentifikasi nilai indeks beban kerja dan menyimpannya dalam array
+function hitungBK() {
+  var semuaCard = document.querySelectorAll(".custom-card");
+  bebanKerjaArray = [];
+
+  semuaCard.forEach(function (card) {
+    var jenisPekerjaanInput = card.querySelector(".jenisPekerjaan").value;
+    var kategoriPekerjaanInput = card.querySelector(".kategoriPekerjaan").value;
+    var posisiKerjaInput = card.querySelector(".posisiKerja").value;
+
+    // Mencari jenis pekerjaan yang sesuai di dalam data
+    var jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(
+      (jenis) => jenis.nama === jenisPekerjaanInput
+    );
+    if (!jenisPekerjaanFound) {
+      console.error("Jenis pekerjaan tidak ditemukan.");
+      return;
+    }
+
+    // Mencari kategori pekerjaan yang sesuai di dalam data
+    var kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(
+      (kategori) => kategori.nama === kategoriPekerjaanInput
+    );
+    if (!kategoriPekerjaanFound) {
+      console.error("Kategori pekerjaan tidak ditemukan.");
+      return;
+    }
+
+    // Mencari posisi kerja yang sesuai di dalam data
+    var nilaiBebanKerja = kategoriPekerjaanFound.posisiKerja[posisiKerjaInput];
+    if (!nilaiBebanKerja) {
+      console.error("Posisi kerja tidak ditemukan.");
+      return;
+    }
+
+    console.log("BK: " + nilaiBebanKerja);
+    bebanKerjaArray.push(nilaiBebanKerja);
+  });
+
+  console.log(bebanKerjaArray);
+  document.getElementById("infoBK").textContent = bebanKerjaArray.join(", ");
+  simpanDataProfil();
+}
+
+// Fungsi untuk menyimpan data profil pekerja (jenis kelamin dan berat badan)
+function simpanDataProfil() {
+  var inputJenisKelamin = document.getElementById("jenisKelamin").value;
+  var inputBeratBadan = document.getElementById("beratBadan").value;
+
+  document.getElementById("infoJenisKelamin").textContent = inputJenisKelamin;
+  document.getElementById("infoBeratBadan").textContent =
+    inputBeratBadan + " kg";
+
+  simpanDataWaktu();
 }
 
 // Fungsi untuk menduplikat card
@@ -227,66 +314,6 @@ function validasiInput() {
     return;
   }
   hitungBK();
-}
-
-// Definisikan variabel global
-var bebanKerjaArray = [];
-var waktuKerjaArray = [];
-
-// Fungsi untuk mengidentifikasi nilai indeks beban kerja dan menyimpannya dalam array
-function hitungBK() {
-  var semuaCard = document.querySelectorAll(".custom-card");
-  bebanKerjaArray = [];
-
-  semuaCard.forEach(function (card) {
-    var jenisPekerjaanInput = card.querySelector(".jenisPekerjaan").value;
-    var kategoriPekerjaanInput = card.querySelector(".kategoriPekerjaan").value;
-    var posisiKerjaInput = card.querySelector(".posisiKerja").value;
-
-    // Mencari jenis pekerjaan yang sesuai di dalam data
-    var jenisPekerjaanFound = dataBebanKerja.jenisPekerjaan.find(
-      (jenis) => jenis.nama === jenisPekerjaanInput
-    );
-    if (!jenisPekerjaanFound) {
-      console.error("Jenis pekerjaan tidak ditemukan.");
-      return;
-    }
-
-    // Mencari kategori pekerjaan yang sesuai di dalam data
-    var kategoriPekerjaanFound = jenisPekerjaanFound.kategoriPekerjaan.find(
-      (kategori) => kategori.nama === kategoriPekerjaanInput
-    );
-    if (!kategoriPekerjaanFound) {
-      console.error("Kategori pekerjaan tidak ditemukan.");
-      return;
-    }
-
-    // Mencari posisi kerja yang sesuai di dalam data
-    var nilaiBebanKerja = kategoriPekerjaanFound.posisiKerja[posisiKerjaInput];
-    if (!nilaiBebanKerja) {
-      console.error("Posisi kerja tidak ditemukan.");
-      return;
-    }
-
-    console.log("BK: " + nilaiBebanKerja);
-    bebanKerjaArray.push(nilaiBebanKerja);
-  });
-
-  console.log(bebanKerjaArray);
-  document.getElementById("infoBK").textContent = bebanKerjaArray.join(", ");
-  simpanDataProfil();
-}
-
-// Fungsi untuk menyimpan data profil pekerja (jenis kelamin dan berat badan)
-function simpanDataProfil() {
-  var inputJenisKelamin = document.getElementById("jenisKelamin").value;
-  var inputBeratBadan = document.getElementById("beratBadan").value;
-
-  document.getElementById("infoJenisKelamin").textContent = inputJenisKelamin;
-  document.getElementById("infoBeratBadan").textContent =
-    inputBeratBadan + " kg";
-
-  simpanDataWaktu();
 }
 
 // Fungsi untuk menyimpan data waktu kerja dalam array dan menjumlahkannya
@@ -380,8 +407,7 @@ function hitungBKRataRata() {
   var persenWaktu = (totalWaktuKerja * 100) / 480;
   var batasISBB;
 
-
-if (totalBKRataRata <= 200) {
+  if (totalBKRataRata <= 200) {
     var kategoriBK = "Ringan";
     if (persenWaktu <= 25) {
       var batasISBB = 32.5;
@@ -422,14 +448,26 @@ if (totalBKRataRata <= 200) {
   document.getElementById("kategoriBKText").textContent = kategoriBK;
   document.getElementById("suhuRekomendasiText").textContent = batasISBB;
   document.getElementById("infoPersenWaktu").textContent = persenWaktu;
-  
-  var suhuISBB = hitungIndeksSuhu();
-  if (suhuISBB>batasISBB) {
-    document.getElementById("saran").textContent = "Suhu bola basah berada di atas batas suhu batas rekomendasi untuk bekerja. Bekerja tidak disarankan."
-  } else if (suhuISBB == batasISBB) {
-    document.getElementById("saran").textContent = "Suhu bola basah sama dengan suhu maksimal rekomendasi untuk bekerja. Bekerja diperobolehkan namun harus tetap berhati-hati."
-  } else {
-    document.getElementById("saran").textContent = "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan."
-  }
-}
 
+  var suhuISBB = hitungIndeksSuhu();
+  if (suhuISBB > batasISBB) {
+    document.getElementById("saran").textContent =
+      "Suhu bola basah berada di atas batas suhu batas rekomendasi untuk bekerja. Bekerja tidak disarankan.";
+  } else if (suhuISBB == batasISBB) {
+    document.getElementById("saran").textContent =
+      "Suhu bola basah sama dengan suhu maksimal rekomendasi untuk bekerja. Bekerja diperobolehkan namun harus tetap berhati-hati.";
+  } else {
+    document.getElementById("saran").textContent =
+      "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan.";
+  }
+
+  setTimeout(function () {
+    // Menggunakan jQuery untuk transisi menghilang secara perlahan
+    $("#bebanKerja").fadeOut("slow", function () {
+      // Setelah ISBB menghilang, tampilkan form profilPekerja
+      $("#containerHasil").fadeIn("slow");
+    });
+  }, 500); // Jeda waktu 1000 milidetik (1 detik)
+
+  document.getElementById("profilPekerja").style.display = "none";
+}
