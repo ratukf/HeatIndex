@@ -149,13 +149,19 @@ function hitungIndeksSuhu() {
   var suhuBasah = parseInt(document.getElementById("suhuBasah").value);
   var suhuBola = parseInt(document.getElementById("suhuBola").value);
   var suhuKering = parseInt(document.getElementById("suhuKering").value);
-  var suhuBolaBasah = (suhuBasah * 0.7 + suhuBola * 0.2 + suhuKering * 0.1).toFixed(2);
+  var suhuBolaBasah = (
+    suhuBasah * 0.7 +
+    suhuBola * 0.2 +
+    suhuKering * 0.1
+  ).toFixed(2);
 
   if (!suhuBasah || !suhuBola || !suhuKering) {
-    alert("Harap isi seluruh form.")
+    alert("Harap isi seluruh form.");
   } else {
     document.getElementById("ISBBText").textContent = suhuBolaBasah;
-    document.getElementById("showISBB").style.display = 'block';
+    document.getElementById("showISBB").style.display = "block";
+    document.getElementById("ISBBText2").textContent = suhuBolaBasah;
+    return suhuBolaBasah;
   }
 }
 
@@ -223,7 +229,7 @@ function validasiInput() {
   hitungBK();
 }
 
-// Definisikan bebanKerjaArray dan waktuKerjaArray sebagai variabel global
+// Definisikan variabel global
 var bebanKerjaArray = [];
 var waktuKerjaArray = [];
 
@@ -345,9 +351,6 @@ function hitungBKRataRata() {
   // Opsi untuk membulatkan nilai BK_RataRata jika diperlukan
   BK_RataRata = BK_RataRata.toFixed(2); // Membulatkan ke dua desimal
 
-  document.getElementById("rataRataBKText").textContent =
-    BK_RataRata + " kkal/jam";
-
   console.log("Waktu kerja array: " + waktuKerjaArray + " menit");
   console.log("TotalBK: " + totalBK + " kkal/jam");
   console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
@@ -372,4 +375,61 @@ function hitungBKRataRata() {
 
   console.log("Total BK rata-rata: " + totalBKRataRata);
   document.getElementById("BKText").textContent = totalBKRataRata + " kkal/jam";
+
+  var kategoriBK;
+  var persenWaktu = (totalWaktuKerja * 100) / 480;
+  var batasISBB;
+
+
+if (totalBKRataRata <= 200) {
+    var kategoriBK = "Ringan";
+    if (persenWaktu <= 25) {
+      var batasISBB = 32.5;
+    } else if (persenWaktu <= 50) {
+      var batasISBB = 32;
+    } else {
+      var batasISBB = 31;
+    }
+  } else if (totalBKRataRata <= 350) {
+    var kategoriBK = "Sedang";
+    if (persenWaktu <= 25) {
+      var batasISBB = 31.5;
+    } else if (persenWaktu <= 50) {
+      var batasISBB = 30;
+    } else if (persenWaktu <= 75) {
+      var batasISBB = 29;
+    } else {
+      var batasISBB = 28;
+    }
+  } else if (totalBKRataRata <= 500) {
+    var kategoriBK = "Berat";
+    if (persenWaktu <= 25) {
+      var batasISBB = 30.5;
+    } else if (persenWaktu <= 50) {
+      var batasISBB = 29;
+    } else {
+      var batasISBB = 27.5;
+    }
+  } else {
+    var kategoriBK = "Sangat berat";
+    if (persenWaktu <= 25) {
+      var batasISBB = 30;
+    } else {
+      var batasISBB = 28;
+    }
+  }
+
+  document.getElementById("kategoriBKText").textContent = kategoriBK;
+  document.getElementById("suhuRekomendasiText").textContent = batasISBB;
+  document.getElementById("infoPersenWaktu").textContent = persenWaktu;
+  
+  var suhuISBB = hitungIndeksSuhu();
+  if (suhuISBB>batasISBB) {
+    document.getElementById("saran").textContent = "Suhu bola basah berada di atas batas suhu batas rekomendasi untuk bekerja. Bekerja tidak disarankan."
+  } else if (suhuISBB == batasISBB) {
+    document.getElementById("saran").textContent = "Suhu bola basah sama dengan suhu maksimal rekomendasi untuk bekerja. Bekerja diperobolehkan namun harus tetap berhati-hati."
+  } else {
+    document.getElementById("saran").textContent = "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan."
+  }
 }
+
