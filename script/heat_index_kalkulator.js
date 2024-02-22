@@ -54,7 +54,6 @@ function calculateHeatIndex() {
   document.getElementById('resultRecommendation').innerText = recommendation;
   document.getElementById('resultWaterRequirement').innerText = waterRequirement;
   document.getElementById('resultHeatIndex').innerText = heatIndexValue;
-  document.getElementById('bariskolom').innerText = "(Baris, kolom) data heat index: " + "(" + (columnIndex+1) + "," + (rowIndex+1) + ")";
   document.getElementById('table').style.backgroundColor = warnaHighlight;
   document.getElementById('table').style.color = warnaTeks;
   document.getElementById('hasilIdentifikasi').style.display = 'block';

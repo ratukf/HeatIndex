@@ -17,7 +17,6 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
   </head>
 
   <body class="kalkulatorBebanKerja">
@@ -64,7 +63,8 @@
                       type="number"
                       class="form-control"
                       id="suhuBasah"
-                      placeholder="Masukan suhu basah" required
+                      placeholder="Masukan suhu basah"
+                      required
                     />
                   </div>
                   <div class="row mb-3">
@@ -73,7 +73,8 @@
                       type="number"
                       class="form-control"
                       id="suhuBola"
-                      placeholder="Masukan suhu bola" required
+                      placeholder="Masukan suhu bola"
+                      required
                     />
                   </div>
                   <div class="row mb-3">
@@ -84,7 +85,8 @@
                       type="number"
                       class="form-control"
                       id="suhuKering"
-                      placeholder="Masukan suhu kering" required
+                      placeholder="Masukan suhu kering"
+                      required
                     />
                   </div>
                 </div>
@@ -100,7 +102,11 @@
                   </button>
                 </div>
 
-                <div class="row text-center" id="showISBB" style="display: none;">
+                <div
+                  class="row text-center"
+                  id="showISBB"
+                  style="display: none"
+                >
                   <h5>Suhu bola basah: <span id="ISBBText"></span> &degC</h5>
                 </div>
               </form>
@@ -178,7 +184,7 @@
               <div class="row">
                 <h2 class="mb-4 cardTitle">Beban Kerja 1</h2>
               </div>
-  
+
               <!-- Form -->
               <form id="formBebanKerja">
                 <div class="row">
@@ -194,7 +200,9 @@
                       <option value="" selected disabled>
                         Pilih jenis pekerjaan
                       </option>
-                      <option value="1" title="Pekerjaan dengan tangan">1</option>
+                      <option value="1" title="Pekerjaan dengan tangan">
+                        1
+                      </option>
                       <option value="2" title="Pekerjaan dengan satu tangan">
                         2
                       </option>
@@ -261,7 +269,7 @@
             </div>
           </div>
         </div>
-  
+
         <!-- Button tambah beban kerja -->
         <div class="text-center mt-4">
           <button
@@ -270,7 +278,7 @@
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             onclick="duplikatCard()"
-            style="color: #02353c; background-color: transparent; border: none;"
+            style="color: #02353c; background-color: transparent; border: none"
           >
             <span class="material-symbols-outlined" style="font-size: 4rem">
               add_circle
@@ -278,7 +286,7 @@
             <h4>Tambah beban kerja</h4>
           </button>
         </div>
-  
+
         <!-- Button home -->
         <div class="row mt-4">
           <div class="col-md-12 mt-4 text-center">
@@ -304,26 +312,30 @@
           <div class="card">
             <div class="card-body shadow p-4">
               <div class="row text-center">
-                  <h6>Total beban kerja: <span id="BKText"></span></h6>
-                  <h6>Total waktu kerja: <span id="totalWaktuText"></span></h6>
-                  <h6>Kategori beban kerja: <span id="kategoriBKText"></span></h6>
-                  <h6>Suhu ISBB: <span id="ISBBText2"></span>&degC</h6>
-                  <h6>Suhu rekomendasi maksimal untuk bekerja: <span id="suhuRekomendasiText"></span>&degC</h6>
-                  <h4><span id="saran"></span></h4>
+                <h6>Total beban kerja: <span id="BKText"></span></h6>
+                <h6>
+                  Total waktu kerja: <span id="totalWaktuText"></span> menit
+                </h6>
+                <h6>Kategori beban kerja: <span id="kategoriBKText"></span></h6>
+                <h6>Suhu ISBB: <span id="ISBBText2"></span>&degC</h6>
+                <h6>
+                  Suhu rekomendasi maksimal untuk bekerja:
+                  <span id="suhuRekomendasiText"></span>&degC
+                </h6>
+                <h4><span id="saran"></span></h4>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="row mt-4 mb-4">
-        <h4>Untuk developer:</h4>
-        <h6>Array beban kerja: <span id="infoBK"></span></h6>
-        <h6>Jenis kelamin: <span id="infoJenisKelamin"></span></h6>
-        <h6>Berat badan: <span id="infoBeratBadan"></span></h6>
-        <h6>Array waktu kerja: <span id="infoWaktuKerja"></span></h6>
-        <h6>Persenan waktu kerja: <span id="infoPersenWaktu"></span></h6>
-
+    </div>
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col">
+          <a href="../index.html" class="btn btn-primary shadow" role="button"
+            >Kembali ke home</a
+          >
+        </div>
       </div>
     </div>
 

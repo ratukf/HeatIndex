@@ -144,6 +144,9 @@ var dataBebanKerja = {
   ],
 };
 
+// Inisiasi variabel
+var suhuBolaBasah;
+
 // Fungsi untuk menghitung ISBB
 function hitungIndeksSuhu() {
   var suhuBasah = parseInt(document.getElementById("suhuBasah").value);
@@ -162,14 +165,12 @@ function hitungIndeksSuhu() {
     document.getElementById("showISBB").style.display = "block";
     document.getElementById("ISBBText2").textContent = suhuBolaBasah;
 
-    // Tambahkan jeda 1 detik
+    // Animasi fadeout dan feadein
     setTimeout(function () {
-      // Menggunakan jQuery untuk transisi menghilang secara perlahan
       $("#ISBB").fadeOut("slow", function () {
-        // Setelah ISBB menghilang, tampilkan form profilPekerja
         $("#profilPekerja").fadeIn("slow");
       });
-    }, 1000); // Jeda waktu 1000 milidetik (1 detik)
+    }, 1000); 
   }
 }
 
@@ -181,17 +182,11 @@ function nextPage() {
   if (!jenisKelamin || !beratBadan) {
     alert("Harap isi seluruh form.");
   } else {
-    document.getElementById("infoJenisKelamin").textContent = jenisKelamin;
-    document.getElementById("infoBeratBadan").textContent =
-      beratBadan + " kg";
-    // Tambahkan jeda 1 detik
     setTimeout(function () {
-      // Menggunakan jQuery untuk transisi menghilang secara perlahan
       $("#profilPekerja").fadeOut("slow", function () {
-        // Setelah ISBB menghilang, tampilkan form profilPekerja
         $("#bebanKerja").fadeIn("slow");
       });
-    }, 500); // Jeda waktu 1000 milidetik (1 detik)
+    }, 500);
   }
 }
 
@@ -234,7 +229,7 @@ function perbaruiJudulCard() {
   });
 }
 
-// Definisikan variabel global
+// Mendefinisikan variabel global
 var bebanKerjaArray = [];
 var waktuKerjaArray = [];
 
@@ -262,11 +257,10 @@ function validasiInput() {
   }
 
   setTimeout(function () {
-    // Menggunakan jQuery untuk transisi menghilang secara perlahan
     $("#bebanKerja").fadeOut("slow", function () {
       $("#containerHasil").fadeIn("slow");
     });
-  }, 500); // Jeda waktu 1000 milidetik (1 detik)
+  }, 500);
 
   hitungBK();
 }
@@ -311,7 +305,6 @@ function hitungBK() {
   });
 
   console.log(bebanKerjaArray);
-  document.getElementById("infoBK").textContent = bebanKerjaArray.join(", ");
   simpanDataWaktu();
 }
 
@@ -329,40 +322,40 @@ function simpanDataWaktu() {
   waktuKerjaArray.forEach((num) => {
     totalWaktuKerja += num;
   });
+  
+  document.getElementById('totalWaktuText').textContent = totalWaktuKerja;
+  
   console.log("Array waktu kerja: " + waktuKerjaArray);
   console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
-
-  document.getElementById("infoWaktuKerja").textContent =
-    waktuKerjaArray.join(", ");
-  document.getElementById("totalWaktuText").textContent =
-    totalWaktuKerja + " menit";
 
   hitungBKRataRata();
 }
 
-// Fungsi untuk menghitung BK rata-rata dan total beban kerja
+// Fungsi untuk menghitung BK total
 function hitungBKRataRata() {
   if (bebanKerjaArray.length !== waktuKerjaArray.length) {
     console.error("Panjang array tidak cocok.");
     return;
   }
 
-  waktuKerjaArray = []; // Reset array untuk memastikan data selalu baru
+  waktuKerjaArray = []; 
   var totalWaktuKerja = 0;
   var cards = document.querySelectorAll(".custom-card");
 
+  // Memasukkan seluruh data waktu kerja ke dalam array
   cards.forEach(function (card) {
     var waktuKerja = parseInt(card.querySelector(".waktuKerja").value);
     waktuKerjaArray.push(waktuKerja);
   });
 
+  // Menghitung total waktu keseluruhan
   waktuKerjaArray.forEach((num) => {
     totalWaktuKerja += num;
   });
 
+  // Menghitung beban kerja dari masing masing pekerjaan dan menyimpannya dalam array
   let totalBK = 0;
   let BK = 0;
-
   for (let i = 0; i < bebanKerjaArray.length; i++) {
     totalBK += bebanKerjaArray[i] * waktuKerjaArray[i];
     BK = bebanKerjaArray[i] * waktuKerjaArray[i];
@@ -371,17 +364,19 @@ function hitungBKRataRata() {
     console.log("Hasil BK x T: " + BK);
   }
 
+  // Menghitung nilai beban kerja rata-rata
   let BK_RataRata = (totalBK * 60) / totalWaktuKerja;
 
   console.log("Total waktu kerja: " + totalWaktuKerja);
-  // Opsi untuk membulatkan nilai BK_RataRata jika diperlukan
-  BK_RataRata = BK_RataRata.toFixed(2); // Membulatkan ke dua desimal
+
+  BK_RataRata = BK_RataRata.toFixed(2); 
 
   console.log("Waktu kerja array: " + waktuKerjaArray + " menit");
   console.log("TotalBK: " + totalBK + " kkal/jam");
   console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
   console.log("BK rata-rata: " + BK_RataRata);
 
+  // Menghitung total beban kerja dengan mempertimbangkan jenis kelamin pekerja
   var beratBadan = document.getElementById("beratBadan").value;
   var kkalLakiLaki = 1;
   var kkalPerempuan = 0.9;
@@ -393,14 +388,15 @@ function hitungBKRataRata() {
     mb = beratBadan * kkalPerempuan;
   }
 
-  let BK_RataRataNumber = parseFloat(BK_RataRata); // Konversi ke Number jika diperlukan
-  let mbNumber = parseFloat(mb); // Konversi ke Number jika diperlukan
+  let BK_RataRataNumber = parseFloat(BK_RataRata); 
+  let mbNumber = parseFloat(mb); 
 
-  let totalBKRataRata = (BK_RataRataNumber + mbNumber).toFixed(2); // Lakukan penambahan dan konversi ke string dengan 2 angka desimal
+  let totalBKRataRata = (BK_RataRataNumber + mbNumber).toFixed(2); 
 
   console.log("Total BK rata-rata: " + totalBKRataRata);
   document.getElementById("BKText").textContent = totalBKRataRata + " kkal/jam";
 
+  // Mengidentifikasi kategori total beban pekerjaan
   var kategoriBK;
   var persenWaktu = (totalWaktuKerja * 100) / 480;
   var batasISBB;
@@ -445,23 +441,16 @@ function hitungBKRataRata() {
 
   document.getElementById("kategoriBKText").textContent = kategoriBK;
   document.getElementById("suhuRekomendasiText").textContent = batasISBB;
-  document.getElementById("infoPersenWaktu").textContent = persenWaktu;
 
-  var suhuISBB = hitungIndeksSuhu();
-  if (suhuISBB > batasISBB) {
+  // Mengidentifikasi rekomendasi bekerja atau tidak bekerja
+  if (suhuBolaBasah > batasISBB) {
     document.getElementById("saran").textContent =
       "Suhu bola basah berada di atas batas suhu batas rekomendasi untuk bekerja. Bekerja tidak disarankan.";
-  } else if (suhuISBB == batasISBB) {
+  } else if (suhuBolaBasah == batasISBB) {
     document.getElementById("saran").textContent =
       "Suhu bola basah sama dengan suhu maksimal rekomendasi untuk bekerja. Bekerja diperobolehkan namun harus tetap berhati-hati.";
   } else {
     document.getElementById("saran").textContent =
       "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan.";
   }
-
-  hide();
-}
-
-function hide() {
-  document.getElementById("profilPekerja").style.display = "none";
 }
