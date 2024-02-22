@@ -149,9 +149,9 @@ var suhuBolaBasah;
 
 // Fungsi untuk menghitung ISBB
 function hitungIndeksSuhu() {
-  var suhuBasah = parseInt(document.getElementById("suhuBasah").value);
-  var suhuBola = parseInt(document.getElementById("suhuBola").value);
-  var suhuKering = parseInt(document.getElementById("suhuKering").value);
+  var suhuBasah = parseFloat(document.getElementById("suhuBasah").value);
+  var suhuBola = parseFloat(document.getElementById("suhuBola").value);
+  var suhuKering = parseFloat(document.getElementById("suhuKering").value);
   var suhuBolaBasah = (
     (suhuBasah * 0.7) +
     (suhuBola * 0.2) +
