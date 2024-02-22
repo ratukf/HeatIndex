@@ -18,195 +18,280 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
 
-  <body>
-    <div class="container p-5">
-      <h1>Kalkulator Beban Kerja</h1>
+  <body class="kalkulatorBebanKerja">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-transparent">
+      <div class="container px-5">
+        <div class="row">
+          <a class="navbar-brand" href="../index.html" style="color: #02353c">
+            <img
+              src="../imgs/agricultural-logo.png"
+              alt="Source: https://lovepik.com/image-401740052/agricultural-logo.html"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+            />
+            Nama Aplikasi
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container text-center mb-4">
+      <h2>Kalkulator Beban Kerja</h2>
     </div>
 
-    <!-- Container card beban kerja -->
-    <div class="container" id="containerBebanKerja">
-      <div id="cardProfilPekerja">
-        <div class="card shadow p-5">
-          <div class="card-body">
-            <div class="row">
-              <h2 class="mb-4">Profil Pekerja</h2>
-            </div>
-            <form id="formProfilPekerja">
-              <div class="row mb-4">
-                <div class="col-md-4">
-                  <label for="jenisKelamin" class="form-label"
-                    >Jenis Kelamin</label
-                  >
-                  <select
-                    class="jenisKelamin form-select"
-                    id="jenisKelamin"
-                    required
-                  >
-                    <option value="" selected disabled>
-                      Pilih jenis kelamin pekerja
-                    </option>
-                    <option value="lakiLaki">Laki-laki</option>
-                    <option value="perempuan">Perempuan</option>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <label for="beratBadan" class="form-label"
-                    >Berat Badan (kg)</label
-                  >
-                  <input
-                    type="number"
-                    class="beratBadan form-control"
-                    id="beratBadan"
-                    placeholder="Masukan berat badan pekerja (kg)"
-                    required
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div id="cardBebanKerja">
-        <div class="card custom-card shadow p-5 mt-4">
-          <div class="card-body">
-            <div class="row">
-              <h2 class="mb-4 cardTitle">Beban Kerja 1</h2>
-            </div>
-
-            <!-- Form -->
-            <form id="formBebanKerja">
-              <div class="row">
-                <div class="col-md-3">
-                  <label for="jenisPekerjaan" class="form-label"
-                    >Jenis Pekerjaan</label
-                  >
-                  <select
-                    class="jenisPekerjaan form-select"
-                    id="jenisPekerjaan"
-                    required
-                  >
-                    <option value="" selected disabled>
-                      Pilih jenis pekerjaan
-                    </option>
-                    <option value="1" title="Pekerjaan dengan tangan">1</option>
-                    <option value="2" title="Pekerjaan dengan satu tangan">
-                      2
-                    </option>
-                    <option value="3" title="Pekerjaan dengan dua lengan">
-                      3
-                    </option>
-                    <option
-                      value="4"
-                      title="Pekerjaan dengan menggunakan gerakan tangan"
-                    >
-                      4
-                    </option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label for="kategoriPekerjaan" class="form-label"
-                    >Kategori Pekerjaan</label
-                  >
-                  <select
-                    class="kategoriPekerjaan form-select"
-                    id="kategoriPekerjaan"
-                    required
-                  >
-                    <option value="" selected disabled>
-                      Pilih kategori pekerjaan
-                    </option>
-                    <option value="I">I</option>
-                    <option value="II">II</option>
-                    <option value="III">III</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label for="posisiKerja" class="form-label"
-                    >Posisi Kerja</label
-                  >
-                  <select
-                    class="posisiKerja form-select"
-                    id="posisiKerja"
-                    required
-                  >
-                    <option value="" selected disabled>
-                      Pilih posisi kerja
-                    </option>
-                    <option value="duduk">Duduk</option>
-                    <option value="berdiri">Berdiri</option>
-                    <option value="berjalan">Berjalan</option>
-                    <option value="berjalanmendaki">Berjalan mendaki</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <label for="waktuKerja" class="form-label"
-                    >Waktu kerja (menit)</label
-                  >
-                  <input
-                    type="number"
-                    class="waktuKerja form-control"
-                    id="waktuKerja"
-                    placeholder="Masukan waktu kerja"
-                    required
-                  />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- Button tambah beban kerja -->
-      <div class="text-center mt-4">
-        <button
-          type="button"
-          class="btn"
-          id="tambahBebanKerja"
-          data-bs-toggle="tooltip"
-          data-bs-placement="top"
-          onclick="duplikatCard()"
-          style="color: #0d6efd"
+    <!-- Card form ISBB -->
+    <div class="ISBB">
+      <div class="container containerISBB mb-5 text-center">
+        <div
+          class="card cardISBB p-2 shadow mx-auto mb-4"
+          style="max-width: 400px"
         >
-          <span class="material-symbols-outlined" style="font-size: 4rem">
-            add_circle
-          </span>
-          <h4>Tambah beban kerja</h4>
-        </button>
-      </div>
+          <div class="card-body">
+            <div class="row mb-2">
+              <form id="formISBB">
+                <div class="col">
+                  <div class="row mb-3">
+                    <h3>Hitung ISBB</h3>
+                    <label for="suhuBasah" class="mb-1"
+                      >Suhu basah (&degC)
+                    </label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="suhuBasah"
+                      placeholder="Masukan suhu basah" required
+                    />
+                  </div>
+                  <div class="row mb-3">
+                    <label for="suhuBola" class="mb-1">Suhu bola (&degC)</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="suhuBola"
+                      placeholder="Masukan suhu bola" required
+                    />
+                  </div>
+                  <div class="row mb-3">
+                    <label for="suhuKering" class="mb-1"
+                      >Suhu kering (&degC)</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="suhuKering"
+                      placeholder="Masukan suhu kering" required
+                    />
+                  </div>
+                </div>
+                <div class="row mb-4 mt-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary shadow d-block mx-auto"
+                    style="width: 200px"
+                    onclick="hitungIndeksSuhu()"
+                  >
+                    Hitung
+                  </button>
+                </div>
 
-      <!-- Button home -->
-      <div class="row mt-4">
-        <div class="col-md-12 mt-4 text-center">
+                <div class="row text-center" id="showISBB" style="display: none;">
+                  <h5>Suhu bola basah: <span id="ISBBText"></span> &degC</h5>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card form pekerja -->
+    <div class="profilPekerja">
+      <div class="container containerProfilPekerja mb-5 text-center">
+        <div
+          class="card cardProfilPekerja p-2 shadow mx-auto mb-4"
+          style="max-width: 400px"
+        >
+          <div class="card-body">
+            <div class="row mb-4">
+              <form id="formProfilPekerja">
+                <div class="col">
+                  <div class="row mb-1">
+                    <h4>Profil pekerja</h4>
+                    <label for="jenisKelamin" class="form-label"
+                      >Jenis kelamin</label
+                    >
+                    <select
+                      class="jenisKelamin form-select mb-3"
+                      id="jenisKelamin"
+                      required
+                    >
+                      <option value="" selected disabled>
+                        Pilih jenis kelamin pekerja
+                      </option>
+                      <option value="lakiLaki">Laki-laki</option>
+                      <option value="perempuan">Perempuan</option>
+                    </select>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="beratBadan" class="form-label"
+                      >Berat Badan (kg)</label
+                    >
+                    <input
+                      type="number"
+                      class="beratBadan form-control"
+                      id="beratBadan"
+                      placeholder="Masukan berat badan pekerja (kg)"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row mb-4 mt-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary shadow d-block mx-auto"
+                    style="width: 200px"
+                    onclick="nextPage()"
+                  >
+                    Berikutnya
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card form beban kerja -->
+    <div class="bebanKerja mb-4">
+      <div class="container" id="containerBebanKerja">
+        <div id="cardBebanKerja">
+          <div class="card custom-card shadow p-5 mt-4">
+            <div class="card-body">
+              <div class="row">
+                <h2 class="mb-4 cardTitle">Beban Kerja 1</h2>
+              </div>
+  
+              <!-- Form -->
+              <form id="formBebanKerja">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label for="jenisPekerjaan" class="form-label"
+                      >Jenis Pekerjaan</label
+                    >
+                    <select
+                      class="jenisPekerjaan form-select"
+                      id="jenisPekerjaan"
+                      required
+                    >
+                      <option value="" selected disabled>
+                        Pilih jenis pekerjaan
+                      </option>
+                      <option value="1" title="Pekerjaan dengan tangan">1</option>
+                      <option value="2" title="Pekerjaan dengan satu tangan">
+                        2
+                      </option>
+                      <option value="3" title="Pekerjaan dengan dua lengan">
+                        3
+                      </option>
+                      <option
+                        value="4"
+                        title="Pekerjaan dengan menggunakan gerakan tangan"
+                      >
+                        4
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="kategoriPekerjaan" class="form-label"
+                      >Kategori Pekerjaan</label
+                    >
+                    <select
+                      class="kategoriPekerjaan form-select"
+                      id="kategoriPekerjaan"
+                      required
+                    >
+                      <option value="" selected disabled>
+                        Pilih kategori pekerjaan
+                      </option>
+                      <option value="I">I</option>
+                      <option value="II">II</option>
+                      <option value="III">III</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="posisiKerja" class="form-label"
+                      >Posisi Kerja</label
+                    >
+                    <select
+                      class="posisiKerja form-select"
+                      id="posisiKerja"
+                      required
+                    >
+                      <option value="" selected disabled>
+                        Pilih posisi kerja
+                      </option>
+                      <option value="duduk">Duduk</option>
+                      <option value="berdiri">Berdiri</option>
+                      <option value="berjalan">Berjalan</option>
+                      <option value="berjalanmendaki">Berjalan mendaki</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="waktuKerja" class="form-label"
+                      >Waktu kerja (menit)</label
+                    >
+                    <input
+                      type="number"
+                      class="waktuKerja form-control"
+                      id="waktuKerja"
+                      placeholder="Masukan waktu kerja"
+                      required
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Button tambah beban kerja -->
+        <div class="text-center mt-4">
           <button
-            type="submit"
-            class="btn btn-primary"
-            id="ratarataKalori"
-            onclick="validasiInput()"
-            style="font-size: 1.5rem"
+            type="button"
+            id="tambahBebanKerja"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            onclick="duplikatCard()"
+            style="color: #02353c; background-color: transparent; border: none;"
           >
-            Hitung beban kerja rata-rata
+            <span class="material-symbols-outlined" style="font-size: 4rem">
+              add_circle
+            </span>
+            <h4>Tambah beban kerja</h4>
           </button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 mt-4">
-          <a href="../index.html" class="btn btn-primary" role="button"
-            >Kembali ke home</a
-          >
+  
+        <!-- Button home -->
+        <div class="row mt-4">
+          <div class="col-md-12 mt-4 text-center">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="ratarataKalori"
+              onclick="validasiInput()"
+              style="font-size: 1.5rem"
+            >
+              Hitung beban kerja rata-rata
+            </button>
+          </div>
         </div>
-      </div>
-
-      <div class="row mt-4 mb-4">
-        <h4>Untuk developer:</h4>
-        <h6>Array beban kerja: <span id="infoBK"></span></h6>
-        <h6>Jenis kelamin: <span id="infoJenisKelamin"></span></h6>
-        <h6>Berat badan: <span id="infoBeratBadan"></span></h6>
-        <h6>Array waktu kerja: <span id="infoWaktuKerja"></span></h6>
       </div>
     </div>
 
+    <!-- Card hasil perhitungan beban kerja -->
     <div class="container mb-4" id="containerHasil">
       <div class="card">
         <div class="card-body shadow p-4">
@@ -220,10 +305,18 @@
           </div>
         </div>
       </div>
+      <div class="row mt-4 mb-4">
+        <h4>Untuk developer:</h4>
+        <h6>Array beban kerja: <span id="infoBK"></span></h6>
+        <h6>Jenis kelamin: <span id="infoJenisKelamin"></span></h6>
+        <h6>Berat badan: <span id="infoBeratBadan"></span></h6>
+        <h6>Array waktu kerja: <span id="infoWaktuKerja"></span></h6>
+      </div>
     </div>
 
     <!-- Javascript -->
     <script src="../script/beban_kerja_kalkulator.js"></script>
     <script src="../script/script.js"></script>
+    <script src="../script/suhu_bola.js"> </script>
   </body>
 </html>

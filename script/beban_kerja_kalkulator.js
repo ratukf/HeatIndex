@@ -144,6 +144,21 @@ var dataBebanKerja = {
   ],
 };
 
+// Fungsi untuk menghitung ISBB
+function hitungIndeksSuhu() {
+  var suhuBasah = parseInt(document.getElementById("suhuBasah").value);
+  var suhuBola = parseInt(document.getElementById("suhuBola").value);
+  var suhuKering = parseInt(document.getElementById("suhuKering").value);
+  var suhuBolaBasah = (suhuBasah * 0.7 + suhuBola * 0.2 + suhuKering * 0.1).toFixed(2);
+
+  if (!suhuBasah || !suhuBola || !suhuKering) {
+    alert("Harap isi seluruh form.")
+  } else {
+    document.getElementById("ISBBText").textContent = suhuBolaBasah;
+    document.getElementById("showISBB").style.display = 'block';
+  }
+}
+
 // Fungsi untuk menduplikat card
 function duplikatCard() {
   var container = document.getElementById("cardBebanKerja");
@@ -186,7 +201,7 @@ function perbaruiJudulCard() {
 // Fungsi untuk memvalidasi apakah semua form telah terisi
 function validasiInput() {
   var inputs = document.querySelectorAll(
-    "#cardBebanKerja .custom-card input[required], select[required], #cardProfilPekerja .card input[required], select[required]"
+    ".kalkulatorBebanKerja input[required], select[required]"
   );
   var total = 0;
   var valid = true;

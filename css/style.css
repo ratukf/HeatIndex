@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+/* ALL NAVBAR */
+.navbar {
+  font-family: "Poppins", sans-serif;
+}
+
 /* HOMEPAGE */
 .homepage {
   height: 100vh;
@@ -33,18 +38,12 @@
   background-size: cover;
 }
 
-.homepage .container .row .col-md-6 h1 {
-  font-size: 50px;
-}
-.homepage .navbar {
-  font-family: "Poppins", sans-serif;
-}
-
 .homepage h1 {
   font-family: "Poppins", sans-serif;
   font-weight: 800;
   color: #c1f6ed;
   text-shadow: 6px 2px black;
+  font-size: 50px;
 }
 
 .homepage .btn {
@@ -68,20 +67,20 @@
   padding-left: 30px;
 }
 
-/* PAGE KALKULATOR HEAT INDEX*/ 
+/* PAGE KALKULATOR HEAT INDEX */
 .kalkulatorHeatIndex {
     background: #02353c;
     background: linear-gradient(90deg,#02353c 0%, #c1f6ed 100%);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    background-attachment: fixed;
 }
 
 .kalkulatorHeatIndex .container h2, label, input{
     color: whitesmoke;
 }
 
-.kalkulatorHeatIndex .btn {
+.kalkulatorHeatIndex .btn, .kalkulatorBebanKerja .btn{
     font-family: "Poppins", sans-serif;
     background-color: #02353c; /* Warna latar belakang hijau */
     color: white; /* Warna teks */
@@ -109,3 +108,8 @@
     border-top: none;
   }
   
+/* PAGE KALKULATOR BEBAN KERJA */
+
+.kalkulatorBebanKerja label {
+  color: black;
+}
