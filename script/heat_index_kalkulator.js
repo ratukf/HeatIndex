@@ -1,3 +1,4 @@
+// Fungsi untuk mengidentifikasi heat index
 function calculateHeatIndex() {
   // Ambil nilai suhu udara dan kelembaban relatif dari input
   var temperature = parseFloat(document.getElementById('temperatureInput').value);
@@ -60,6 +61,7 @@ function calculateHeatIndex() {
 
 }
 
+// Fungsi untuk mengidentifikasi indeks data dalam data
 function findIndex(array, value) {
   // Cari indeks dari nilai dalam array
   for (var i = 0; i < array.length; i++) {

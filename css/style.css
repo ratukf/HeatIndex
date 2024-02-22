@@ -49,26 +49,26 @@
 
 .homepage .btn {
   font-family: "Poppins", sans-serif;
-  background-color: #adf684; /* Warna latar belakang hijau */
-  color: #214889; /* Warna teks */
-  text-align: center; /* Posisi teks */
-  text-decoration: none; /* Menghilangkan garis bawah teks */
-  display: inline-block; /* Membuat tombol agar sejajar dengan elemen lain */
-  font-size: 16px; /* Ukuran font */
-  cursor: pointer; /* Mengubah cursor menjadi pointer ketika mouse berada di atas tombol */
-  border: none; /* Menghilangkan border */
-  border-radius: 5px; /* Membulatkan sudut */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Menambahkan bayangan: horizontal offset, vertical offset, blur radius, spread radius, warna */
-  transition: 0.3s; /* Menambahkan efek transisi untuk hover */
+  background-color: #adf684; 
+  color: #214889; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  font-size: 16px; 
+  cursor: pointer; 
+  border: none; 
+  border-radius: 5px; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+  transition: 0.3s; 
 }
 
 .homepage .btn:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3); /* Mengubah bayangan ketika di-hover */
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3); 
   padding-right: 30px;
   padding-left: 30px;
 }
 
-/* PAGE KALKULATOR HEAT INDEX */
+/* PAGE KALKULATOR HEAT INDEX & KALKULATOR BEBAN KERJA */
 .kalkulatorHeatIndex, .kalkulatorBebanKerja {
     background: #3ad77e;
     background: linear-gradient(90deg,#adf684 0%, white 100%);
@@ -81,7 +81,6 @@
 .kalkulatorHeatIndex .container h2, label, input{
   color: #214889;
 }
-
 
 .kalkulatorHeatIndex .btn, .kalkulatorBebanKerja .btn{
     font-family: "Poppins", sans-serif;
