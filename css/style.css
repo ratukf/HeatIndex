@@ -101,15 +101,11 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6); 
   }
 
-  .kalkulatorHeatIndex .table {
-    border-radius: 20px;
-  }
-
   .kalkulatorHeatIndex .table thead tr:first-child th {
     border-bottom: 2px solid white; 
     border-top: none;
   }
-  
+
 /* PAGE KALKULATOR BEBAN KERJA */
 .kalkulatorBebanKerja .profilPekerja, .bebanKerja, #containerHasil {
   display: none; 

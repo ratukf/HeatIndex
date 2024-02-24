@@ -144,9 +144,6 @@ var dataBebanKerja = {
   ],
 };
 
-// Inisiasi variabel
-var suhuBolaBasah;
-
 // Fungsi untuk menghitung ISBB
 function hitungIndeksSuhu() {
   var suhuBasah = parseFloat(document.getElementById("suhuBasah").value);
@@ -164,14 +161,18 @@ function hitungIndeksSuhu() {
     document.getElementById("ISBBText").textContent = suhuBolaBasah;
     document.getElementById("showISBB").style.display = "block";
     document.getElementById("ISBBText2").textContent = suhuBolaBasah;
+  }
+  console.log("SUHU BOLA BASAH:" + suhuBolaBasah);
+  return suhuBolaBasah;
+}
 
+function hideISBB() {
     // Animasi fadeout dan feadein
     setTimeout(function () {
       $("#ISBB").fadeOut("slow", function () {
         $("#profilPekerja").fadeIn("slow");
       });
     }, 1000); 
-  }
 }
 
 // Fungsi tombol berikutnya pada form profil pekerja
@@ -442,6 +443,13 @@ function hitungBKRataRata() {
   document.getElementById("kategoriBKText").textContent = kategoriBK;
   document.getElementById("suhuRekomendasiText").textContent = batasISBB;
 
+  return batasISBB;
+}
+
+function saran() {
+  var suhuBolaBasah = hitungIndeksSuhu();
+  var batasISBB = hitungBKRataRata();
+
   // Mengidentifikasi rekomendasi bekerja atau tidak bekerja
   if (suhuBolaBasah > batasISBB) {
     document.getElementById("saran").textContent =
@@ -449,8 +457,14 @@ function hitungBKRataRata() {
   } else if (suhuBolaBasah == batasISBB) {
     document.getElementById("saran").textContent =
       "Suhu bola basah sama dengan suhu maksimal rekomendasi untuk bekerja. Bekerja diperobolehkan namun harus tetap berhati-hati.";
-  } else {
+  } else if (suhuBolaBasah < batasISBB) {
     document.getElementById("saran").textContent =
       "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan.";
+  } else {
+    document.getElementById("saran").textContent = 
+    "Tidak teridentifikasi."
   }
+
+  console.log("Suhu bola basah = " + suhuBolaBasah);
+  console.log("Batas suhu = " + batasISBB);
 }

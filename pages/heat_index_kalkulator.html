@@ -46,6 +46,8 @@
               class="form-control"
               id="temperatureInput"
               placeholder="Masukkan suhu udara"
+              min = "26"
+              required
             />
           </div>
 
@@ -58,13 +60,18 @@
               class="form-control"
               id="humidityInput"
               placeholder="Masukkan kelembaban relatif"
+              required
+              min = "10"
+              step = "10"
+              max = "90"
             />
           </div>
 
           <button
-            type="button"
+            type="submit"
             class="btn btn-primary"
-            onclick="calculateHeatIndex()"
+            id="submitButton"
+            onclick="validasi()"
           >
             Hitung Heat Index
           </button>
@@ -81,7 +88,7 @@
               <div class="card-body">
                 <div class="mt-4">
                   <h4 class="mb-4">Hasil perhitungan heat index:</h4>
-                  <table class="table" id="table">
+                  <table class="table table-responsive" id="table">
                     <thead>
                       <tr>
                         <th>Kategori</th>
@@ -90,7 +97,7 @@
                         <th>Heat Index Value</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                       <tr>
                         <td id="resultCategory"></td>
                         <td id="resultRecommendation"></td>

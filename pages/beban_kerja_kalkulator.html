@@ -95,7 +95,7 @@
                     class="btn btn-primary shadow d-block mx-auto"
                     style="width: 200px"
                     id="tombolHitungISBB"
-                    onclick="hitungIndeksSuhu()"
+                    onclick="hitungIndeksSuhu(); hideISBB();"
                   >
                     Hitung
                   </button>
@@ -152,6 +152,9 @@
                       class="beratBadan form-control"
                       id="beratBadan"
                       placeholder="Masukan berat badan pekerja (kg)"
+                      min="0"
+                      oninput="this.value = 
+ !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
                       required
                     />
                   </div>
@@ -293,7 +296,7 @@
               type="submit"
               class="btn btn-primary"
               id="ratarataKalori"
-              onclick="validasiInput()"
+              onclick="validasiInput(); saran();"
               style="font-size: 1.5rem"
             >
               Hitung total beban kerja
