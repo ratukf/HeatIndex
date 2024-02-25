@@ -15,6 +15,10 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
@@ -38,139 +42,151 @@
     </nav>
 
     <!-- Judul webpage -->
-    <div class="container text-center mb-4">
-      <h2>Kalkulator Beban Kerja</h2>
-    </div>
+    <div
+      class="container containerISBBProfile text-center mb-4"
+      id="containerISBBProfile"
+    >
+      <h2 class="mb-4">Kalkulator Beban Kerja</h2>
+      <div>
+        <div class="row w-100">
+          <div class="col-md-6">
+            <!-- Card form ISBB -->
+            <div class="ISBB d-flex justify-content-center" id="ISBB">
+              <div
+                class="card cardISBB p-2 shadow mb-4"
+                style="max-width: 400px"
+              >
+                <div class="card-body">
+                  <div class="row mb-2">
+                    <form id="formISBB">
+                      <div class="col">
+                        <div class="row mb-3">
+                          <h3>Hitung ISBB</h3>
+                          <label for="suhuBasah" class="mb-1"
+                            >Suhu basah (&degC)
+                          </label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="suhuBasah"
+                            placeholder="Masukan suhu basah"
+                            required
+                          />
+                        </div>
+                        <div class="row mb-3">
+                          <label for="suhuBola" class="mb-1"
+                            >Suhu bola (&degC)</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="suhuBola"
+                            placeholder="Masukan suhu bola"
+                            required
+                          />
+                        </div>
+                        <div class="row mb-3">
+                          <label for="suhuKering" class="mb-1"
+                            >Suhu kering (&degC)</label
+                          >
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="suhuKering"
+                            placeholder="Masukan suhu kering"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="row mb-4 mt-2">
+                        <button
+                          type="button"
+                          class="btn btn-primary shadow d-block mx-auto"
+                          style="width: 200px"
+                          id="tombolHitungISBB"
+                          onclick="hitungIndeksSuhu()"
+                        >
+                          Hitung
+                        </button>
+                      </div>
 
-    <!-- Card form ISBB -->
-    <div class="ISBB" id="ISBB">
-      <div class="container containerISBB mb-5 text-center">
-        <div
-          class="card cardISBB p-2 shadow mx-auto mb-4"
-          style="max-width: 400px"
-        >
-          <div class="card-body">
-            <div class="row mb-2">
-              <form id="formISBB">
-                <div class="col">
-                  <div class="row mb-3">
-                    <h3>Hitung ISBB</h3>
-                    <label for="suhuBasah" class="mb-1"
-                      >Suhu basah (&degC)
-                    </label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="suhuBasah"
-                      placeholder="Masukan suhu basah"
-                      required
-                    />
-                  </div>
-                  <div class="row mb-3">
-                    <label for="suhuBola" class="mb-1">Suhu bola (&degC)</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="suhuBola"
-                      placeholder="Masukan suhu bola"
-                      required
-                    />
-                  </div>
-                  <div class="row mb-3">
-                    <label for="suhuKering" class="mb-1"
-                      >Suhu kering (&degC)</label
-                    >
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="suhuKering"
-                      placeholder="Masukan suhu kering"
-                      required
-                    />
+                      <div
+                        class="row text-center"
+                        id="showISBB"
+                        style="display: none"
+                      >
+                        <h5>
+                          Suhu bola basah: <span id="ISBBText"></span> &degC
+                        </h5>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <div class="row mb-4 mt-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary shadow d-block mx-auto"
-                    style="width: 200px"
-                    id="tombolHitungISBB"
-                    onclick="hitungIndeksSuhu(); hideISBB();"
-                  >
-                    Hitung
-                  </button>
-                </div>
-
-                <div
-                  class="row text-center"
-                  id="showISBB"
-                  style="display: none"
-                >
-                  <h5>Suhu bola basah: <span id="ISBBText"></span> &degC</h5>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card form pekerja -->
-    <div class="profilPekerja" id="profilPekerja">
-      <div class="container containerProfilPekerja mb-5 text-center">
-        <div
-          class="card cardProfilPekerja p-2 shadow mx-auto mb-4"
-          style="max-width: 400px"
-        >
-          <div class="card-body">
-            <div class="row mb-4">
-              <form id="formProfilPekerja">
-                <div class="col">
-                  <div class="row mb-1">
-                    <h4>Profil pekerja</h4>
-                    <label for="jenisKelamin" class="form-label"
-                      >Jenis kelamin</label
-                    >
-                    <select
-                      class="jenisKelamin form-select mb-3"
-                      id="jenisKelamin"
-                      required
-                    >
-                      <option value="" selected disabled>
-                        Pilih jenis kelamin pekerja
-                      </option>
-                      <option value="lakiLaki">Laki-laki</option>
-                      <option value="perempuan">Perempuan</option>
-                    </select>
-                  </div>
-                  <div class="row mb-3">
-                    <label for="beratBadan" class="form-label"
-                      >Berat Badan (kg)</label
-                    >
-                    <input
-                      type="number"
-                      class="beratBadan form-control"
-                      id="beratBadan"
-                      placeholder="Masukan berat badan pekerja (kg)"
-                      min="0"
-                      oninput="this.value = 
- !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
-                      required
-                    />
+          <div class="col-md-6">
+            <!-- Card form pekerja -->
+            <div
+              class="profilPekerja d-flex justify-content-center"
+              id="profilPekerja"
+            >
+              <div
+                class="card cardProfilPekerja p-2 shadow mb-4"
+                style="max-width: 400px"
+              >
+                <div class="card-body">
+                  <div class="row mb-4">
+                    <form id="formProfilPekerja">
+                      <div class="col">
+                        <div class="row mb-1">
+                          <h4>Profil pekerja</h4>
+                          <label for="jenisKelamin" class="form-label"
+                            >Jenis kelamin</label
+                          >
+                          <select
+                            class="jenisKelamin form-select mb-3"
+                            id="jenisKelamin"
+                            required
+                          >
+                            <option value="" selected disabled>
+                              Pilih jenis kelamin pekerja
+                            </option>
+                            <option value="lakiLaki">Laki-laki</option>
+                            <option value="perempuan">Perempuan</option>
+                          </select>
+                        </div>
+                        <div class="row mb-3">
+                          <label for="beratBadan" class="form-label"
+                            >Berat Badan (kg)</label
+                          >
+                          <input
+                            type="number"
+                            class="beratBadan form-control"
+                            id="beratBadan"
+                            placeholder="Masukan berat badan pekerja (kg)"
+                            min="0"
+                            oninput="this.value = 
+!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="row mb-4 mt-2">
+                        <button
+                          type="button"
+                          class="btn btn-primary shadow d-block mx-auto"
+                          style="width: 200px"
+                          id="tombolBerikutnya"
+                          onclick="nextPage()"
+                        >
+                          Berikutnya
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
-                <div class="row mb-4 mt-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary shadow d-block mx-auto"
-                    style="width: 200px"
-                    id="tombolBerikutnya"
-                    onclick="nextPage()"
-                  >
-                    Berikutnya
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -182,9 +198,20 @@
       <div class="container" id="containerBebanKerja">
         <div id="cardBebanKerja">
           <div class="card custom-card shadow p-5 mt-4">
-            <div class="card-body">
-              <div class="row">
-                <h2 class="mb-4 cardTitle">Beban Kerja 1</h2>
+            <div class="card-body position-relative">
+              <div class="d-flex justify-content-between">
+                <h2 class="cardTitle">Beban Kerja 1</h2>
+                <button
+                  type="button"
+                  id="editJudul"
+                  class="position-absolute top-0 end-0 mt-2 me-2"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  onclick="editJudul(this)"
+                  style="background-color: transparent; border: none"
+                >
+                  <span class="material-symbols-outlined edit">edit</span>
+                </button>
               </div>
 
               <!-- Form -->
@@ -203,19 +230,19 @@
                         Pilih jenis pekerjaan
                       </option>
                       <option value="1" title="Pekerjaan dengan tangan">
-                        1
+                        Pekerjaan dengan tangan
                       </option>
                       <option value="2" title="Pekerjaan dengan satu tangan">
-                        2
+                        Pekerjaan dengan satu tangan
                       </option>
                       <option value="3" title="Pekerjaan dengan dua lengan">
-                        3
+                        Pekerjaan dengan dua lengan
                       </option>
                       <option
                         value="4"
                         title="Pekerjaan dengan menggunakan gerakan tangan"
                       >
-                        4
+                        Pekerjaan dengan menggunakan gerakan tangan
                       </option>
                     </select>
                   </div>
@@ -272,6 +299,25 @@
           </div>
         </div>
 
+        <!-- Button kembali -->
+        <div class="mt-4">
+          <button
+            type="button"
+            id="back"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            onclick="backToISBBProfile()"
+            style="color: #02353c; background-color: transparent; border: none"
+          >
+            <span
+              class="material-symbols-outlined add_circle"
+              style="font-size: 4rem"
+            >
+              arrow_back
+            </span>
+          </button>
+        </div>
+
         <!-- Button tambah beban kerja -->
         <div class="text-center mt-4">
           <button
@@ -282,7 +328,10 @@
             onclick="duplikatCard()"
             style="color: #02353c; background-color: transparent; border: none"
           >
-            <span class="material-symbols-outlined" style="font-size: 4rem">
+            <span
+              class="material-symbols-outlined add_circle"
+              style="font-size: 4rem"
+            >
               add_circle
             </span>
             <h4>Tambah beban kerja</h4>
@@ -330,7 +379,26 @@
           </div>
         </div>
       </div>
+      <!-- Button kembali -->
+      <div class="mt-4">
+        <button
+          type="button"
+          id="back"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          onclick="backToBebanKerja()"
+          style="color: #02353c; background-color: transparent; border: none"
+        >
+          <span
+            class="material-symbols-outlined add_circle"
+            style="font-size: 4rem"
+          >
+            arrow_back
+          </span>
+        </button>
+      </div>
     </div>
+
     <div class="container">
       <div class="row mb-4">
         <div class="col">

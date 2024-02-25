@@ -144,19 +144,49 @@ var dataBebanKerja = {
   ],
 };
 
+function editJudul(button) {
+  // Navigasi ke card body kemudian temukan elemen dengan kelas cardTitle
+  var judul = button.closest('.card-body').querySelector('.cardTitle');
+
+  // Membuat judul dapat diedit
+  judul.contentEditable = true;
+  judul.focus(); // Memfokuskan kursor untuk editing
+
+  // Menambahkan event listener untuk menangkap blur event
+  judul.addEventListener('blur', function () {
+    judul.contentEditable = false;
+    // Optional: Simpan perubahan ke database atau lakukan aksi lain
+  });
+}
+
+function backToISBBProfile() {
+  var containerISBBProfile = document.getElementById("containerISBBProfile");
+  var containerBebanKerja = document.getElementById("bebanKerja");
+  containerISBBProfile.style.display = "block";
+  containerBebanKerja.style.display = "none";
+
+}
+
+function backToBebanKerja() {
+  var containerBebanKerja = document.getElementById("bebanKerja");
+  var containerHasil = document.getElementById("containerHasil");
+  containerBebanKerja.style.display = "block";
+  containerHasil.style.display = "none";
+}
+
 // Fungsi untuk menghitung ISBB
 function hitungIndeksSuhu() {
   var suhuBasah = parseFloat(document.getElementById("suhuBasah").value);
   var suhuBola = parseFloat(document.getElementById("suhuBola").value);
   var suhuKering = parseFloat(document.getElementById("suhuKering").value);
   var suhuBolaBasah = (
-    (suhuBasah * 0.7) +
-    (suhuBola * 0.2) +
-    (suhuKering * 0.1)
+    suhuBasah * 0.7 +
+    suhuBola * 0.2 +
+    suhuKering * 0.1
   ).toFixed(2);
 
   if (!suhuBasah || !suhuBola || !suhuKering) {
-    alert("Harap isi seluruh form.");
+    alert("Harap isi form suhu basah, suhu bola, dan suhu kering.");
   } else {
     document.getElementById("ISBBText").textContent = suhuBolaBasah;
     document.getElementById("showISBB").style.display = "block";
@@ -166,29 +196,28 @@ function hitungIndeksSuhu() {
   return suhuBolaBasah;
 }
 
-function hideISBB() {
-    // Animasi fadeout dan feadein
-    setTimeout(function () {
-      $("#ISBB").fadeOut("slow", function () {
-        $("#profilPekerja").fadeIn("slow");
-      });
-    }, 1000); 
-}
-
 // Fungsi tombol berikutnya pada form profil pekerja
 function nextPage() {
+  var suhuBasah = parseFloat(document.getElementById("suhuBasah").value);
+  var suhuBola = parseFloat(document.getElementById("suhuBola").value);
+  var suhuKering = parseFloat(document.getElementById("suhuKering").value);
   var jenisKelamin = document.getElementById("jenisKelamin").value;
   var beratBadan = document.getElementById("beratBadan").value;
 
-  if (!jenisKelamin || !beratBadan) {
+  if (!suhuBasah || !suhuBola || !suhuKering || !jenisKelamin || !beratBadan) {
     alert("Harap isi seluruh form.");
   } else {
-    setTimeout(function () {
-      $("#profilPekerja").fadeOut("slow", function () {
-        $("#bebanKerja").fadeIn("slow");
-      });
-    }, 500);
+    hideISBBProfile();
   }
+}
+
+function hideISBBProfile() {
+  // Animasi fadeout dan feadein
+  setTimeout(function () {
+    $(".containerISBBProfile").fadeOut("slow", function () {
+      $("#bebanKerja").fadeIn("slow");
+    });
+  }, 500);
 }
 
 // Fungsi untuk menduplikat card
@@ -323,9 +352,9 @@ function simpanDataWaktu() {
   waktuKerjaArray.forEach((num) => {
     totalWaktuKerja += num;
   });
-  
-  document.getElementById('totalWaktuText').textContent = totalWaktuKerja;
-  
+
+  document.getElementById("totalWaktuText").textContent = totalWaktuKerja;
+
   console.log("Array waktu kerja: " + waktuKerjaArray);
   console.log("Total waktu kerja: " + totalWaktuKerja + " menit");
 
@@ -339,7 +368,7 @@ function hitungBKRataRata() {
     return;
   }
 
-  waktuKerjaArray = []; 
+  waktuKerjaArray = [];
   var totalWaktuKerja = 0;
   var cards = document.querySelectorAll(".custom-card");
 
@@ -370,7 +399,7 @@ function hitungBKRataRata() {
 
   console.log("Total waktu kerja: " + totalWaktuKerja);
 
-  BK_RataRata = BK_RataRata.toFixed(2); 
+  BK_RataRata = BK_RataRata.toFixed(2);
 
   console.log("Waktu kerja array: " + waktuKerjaArray + " menit");
   console.log("TotalBK: " + totalBK + " kkal/jam");
@@ -389,10 +418,10 @@ function hitungBKRataRata() {
     mb = beratBadan * kkalPerempuan;
   }
 
-  let BK_RataRataNumber = parseFloat(BK_RataRata); 
-  let mbNumber = parseFloat(mb); 
+  let BK_RataRataNumber = parseFloat(BK_RataRata);
+  let mbNumber = parseFloat(mb);
 
-  let totalBKRataRata = (BK_RataRataNumber + mbNumber).toFixed(2); 
+  let totalBKRataRata = (BK_RataRataNumber + mbNumber).toFixed(2);
 
   console.log("Total BK rata-rata: " + totalBKRataRata);
   document.getElementById("BKText").textContent = totalBKRataRata + " kkal/jam";
@@ -461,8 +490,7 @@ function saran() {
     document.getElementById("saran").textContent =
       "Suhu bola basah berada di bawah batas suhu rekomendasi untuk bekerja. Bekerja diperbolehkan.";
   } else {
-    document.getElementById("saran").textContent = 
-    "Tidak teridentifikasi."
+    document.getElementById("saran").textContent = "Tidak teridentifikasi.";
   }
 
   console.log("Suhu bola basah = " + suhuBolaBasah);
