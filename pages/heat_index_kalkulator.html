@@ -14,7 +14,7 @@
   </head>
   <body class="kalkulatorHeatIndex">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-transparent mb-4">
+    <nav class="navbar navbar-expand-lg bg-transparent">
       <div class="container px-5">
         <div class="row">
           <a class="navbar-brand" href="../index.html" style="color: white">
@@ -34,7 +34,7 @@
     <div class="container">
       <div class="row mb-5">
         <!-- Container kiri -->
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4 sticky-col pt-4">
           <h2 class="mb-4">Kakulator Heat Index</h2>
 
           <div class="mb-3">
@@ -46,7 +46,7 @@
               class="form-control"
               id="temperatureInput"
               placeholder="Masukkan suhu udara"
-              min = "26"
+              min="26"
               required
             />
           </div>
@@ -61,62 +61,133 @@
               id="humidityInput"
               placeholder="Masukkan kelembaban relatif"
               required
-              min = "10"
-              step = "10"
-              max = "90"
+              min="10"
+              step="10"
+              max="90"
             />
           </div>
-
           <button
             type="submit"
-            class="btn btn-primary"
+            class="btn btn-primary mb-5"
             id="submitButton"
             onclick="validasi()"
           >
             Hitung Heat Index
           </button>
-        </div>
-
-        <!-- Container kanan -->
-        <div class="col-md-8 mb-4">
-          <div class="container">
-            <div
-              class="card"
-              id="hasilIdentifikasi"
-              style="display: none; border-radius: 10px"
-            >
-              <div class="card-body">
-                <div class="mt-4">
-                  <h4 class="mb-4">Hasil perhitungan heat index:</h4>
-                  <table class="table table-responsive" id="table">
-                    <thead>
-                      <tr>
-                        <th>Kategori</th>
-                        <th>Rekomendasi Kerja/Istirahat</th>
-                        <th>Kebutuhan Air Mineral</th>
-                        <th>Heat Index Value</th>
-                      </tr>
-                    </thead>
-                    <tbody id="tbody">
-                      <tr>
-                        <td id="resultCategory"></td>
-                        <td id="resultRecommendation"></td>
-                        <td id="resultWaterRequirement"></td>
-                        <td id="resultHeatIndex"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+          <!-- Button kembali ke home -->
+          <div class="row mb-5 mt-5">
+            <div class="col">
+              <a href="../index.html" class="btn btn-primary shadow" role="button"
+                >Kembali ke home</a
+              >
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <a href="../index.html" class="btn btn-primary shadow" role="button"
-            >Kembali ke home</a
+
+        <!-- Container kanan -->
+        <div class="col-md-8 mb-4 h-100 pt-4">
+          <!-- Hasil perhitungan -->
+          <div class="container">
+            <div
+            class="card mb-5"
+            id="hasilIdentifikasi"
+            style="display: none; border-radius: 10px"
           >
+            <div class="card-body">
+              <div class="mt-4">
+                <h4 class="mb-4">Hasil perhitungan heat index:</h4>
+                <table class="table table-responsive" id="table">
+                  <thead>
+                    <tr>
+                      <th>Kategori</th>
+                      <th>Rekomendasi Kerja/Istirahat</th>
+                      <th>Kebutuhan Air Mineral</th>
+                      <th>Heat Index Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody">
+                    <tr>
+                      <td id="resultCategory"></td>
+                      <td id="resultRecommendation"></td>
+                      <td id="resultWaterRequirement"></td>
+                      <td id="resultHeatIndex"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Materi -->
+          </div>
+          <div class="container scrollable-col">
+            <h4>Heat Index</h4>
+            <p>
+              Kalkulator Heat Index berfungsi untuk menghitung atau memprediksi
+              Heat Index. Hasil perhitungan tersebut bertujuan untuk
+              mengevaluasi risiko terkait panas terhadap kesehatan manusia
+              dengan mempertimbangkan suhu udara aktual dan kelembaban relatif.
+              Hasil perhitungan Heat Index dapat menunjukkan kategori bahaya
+              dari suatu iklim kerja, sehingga dapat menjadi dasar untuk
+              melakukan upaya mitigasi. Upaya mitigasi yang dapat dilakukan
+              adalah dengan memberikan rekomendasi kebutuhan air mineral untuk
+              pekerja dan perbandingan jam kerja dengan waktu istirahat.
+            </p>
+            <h6>Apa itu Heat Index?</h6>
+            <p>
+              Heat Index adalah sebuah pengukuran yang digunakan untuk
+              menggambarkan suhu panas yang dirasakan apabila dikombinasikan
+              dengan kelembaban udara. Perhitungan Heat Index dapat dilakukan
+              dengan memasukkan hasil pengukuran iklim kerja menggunakan alat
+              ukur WBGT (Wet Bulb Globe Temperature).
+            </p>
+            <h6>Apa itu WBGT?</h6>
+            <p>
+              WBGT atau Wet Bulb Globe Temperature merupakan parameter yang
+              digunakan untuk menilai tingkat iklim kerja yang terdiri dari
+              hasil perhitungan antara suhu udara kering, suhu basah alami, dan
+              suhu bola. WBGT adalah alat prakiraan eksperimental yang
+              menunjukkan perkiraan tekanan panas pada tubuh manusia.
+            </p>
+            <h6>Dampak Iklim Kerja Panas terhadap Pekerja</h6>
+            <p>
+              Iklim kerja panas dapat menyebabkan gangguan pada pekerja, baik
+              secara fisiologis maupun psikologis. Respon fisiologis tersebut
+              antara lain seperti adanya peningkatan suhu tubuh, denyut nadi,
+              dan tekanan darah. Sedangkan untuk gangguan terhadap respon
+              psikologis yaitu heat stress. Heat stress merupakan penyakit yang
+              berhubungan dengan tekanan panas dan memiliki beberapa jenis
+              sebagai berikut :
+            </p>
+            <ol type="a">
+              <li>Heat Cramps</li>
+              <p>
+                Pada kondisi ini, gejala yang ditunjukkan dapat berupa rasa
+                nyeri dan kejang pada kaki, perut, dan tangan dengan disertai
+                banyak keringan yang keluar. Kondisi heat cramps terjadi karena
+                ketidakseimbangan antara cairan dan garam selama melakukan kerja
+                fisik dengan beban yang berat di lingkungan panas.
+              </p>
+              <li>Heat Exhaustion</li>
+              <p>
+                Pada kondisi ini terjadi saat jumlah air yang dikeluarkan oleh
+                tubuh, seperti keringat dan urin, melebihi perkiraan volume air
+                yang diminum. Gejala yang dirasakan ketika mengalami heat
+                exhaustion yaitu berupa keringat yang sangat banyak, tubuh
+                lemah, kepala merasa pusing, kulit pucat, dan mual.
+              </p>
+              <li>Heat Stroke</li>
+              <p>
+                Pada kondisi ini terjadi ketika tubuh tidak dapat mengontrol
+                suhu saat terpapar panas terlalu tinggi dalam waktu yang lama.
+                Pada saat terjadi heat stroke, suhu tubuh akan naik dengan
+                cepat, dan mekanisme keringat gagal sehingga tubuh tidak dapat
+                melakukan pendinginan. Apabila tidak ditangani dengan baik,
+                serangan heat stroke dapat menyebabkan kematian atau cacat
+                permanen.
+              </p>
+              <p>Source : Construction Safety Manual, Saudi Aramco, 2011.</p>
+            </ol>
+          </div>
         </div>
       </div>
     </div>

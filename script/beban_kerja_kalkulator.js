@@ -144,29 +144,27 @@ var dataBebanKerja = {
   ],
 };
 
+// Fungsi untuk mengedit judul pekerjaan
 function editJudul(button) {
-  // Navigasi ke card body kemudian temukan elemen dengan kelas cardTitle
   var judul = button.closest('.card-body').querySelector('.cardTitle');
 
-  // Membuat judul dapat diedit
   judul.contentEditable = true;
-  judul.focus(); // Memfokuskan kursor untuk editing
+  judul.focus(); 
 
-  // Menambahkan event listener untuk menangkap blur event
   judul.addEventListener('blur', function () {
     judul.contentEditable = false;
-    // Optional: Simpan perubahan ke database atau lakukan aksi lain
   });
 }
 
+// Fungsi untuk tombol kembali ke page kalkulator ISBB dan profil pekerja
 function backToISBBProfile() {
   var containerISBBProfile = document.getElementById("containerISBBProfile");
   var containerBebanKerja = document.getElementById("bebanKerja");
   containerISBBProfile.style.display = "block";
   containerBebanKerja.style.display = "none";
-
 }
 
+// Fungsi untuk kembali page beban kerja
 function backToBebanKerja() {
   var containerBebanKerja = document.getElementById("bebanKerja");
   var containerHasil = document.getElementById("containerHasil");
@@ -475,6 +473,7 @@ function hitungBKRataRata() {
   return batasISBB;
 }
 
+// Fungsi untuk menampilkan saran berdasarkan heat index yang muncul
 function saran() {
   var suhuBolaBasah = hitungIndeksSuhu();
   var batasISBB = hitungBKRataRata();

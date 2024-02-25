@@ -14,6 +14,14 @@ for (var i = 0; i < inputs.length; i++) {
   inputs[i].addEventListener("keypress", handleEnterPress);
 }
 
+// Fungsi untuk mengembalikan page ke paling atas
+function backToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+});
+}
+
 // Fungsi untuk mengidentifikasi heat index
 function validasi() {
   // Ambil nilai suhu udara dan kelembaban relatif dari input
@@ -46,10 +54,12 @@ function validasi() {
       );
     } else {
       hitungHeatIndex();
+      backToTop();
     }
   }
 }
 
+// Fungsi untuk mengidentifikasi lokasi data heat index 
 function hitungHeatIndex() {
   var temperature = parseFloat(
     document.getElementById("temperatureInput").value
