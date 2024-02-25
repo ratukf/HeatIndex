@@ -217,7 +217,7 @@ function hideISBBProfile() {
     $(".containerISBBProfile").fadeOut("slow", function () {
       $("#bebanKerja").fadeIn("slow");
     });
-  }, 500);
+  }, 250);
 }
 
 // Fungsi untuk menduplikat card
@@ -290,7 +290,7 @@ function validasiInput() {
     $("#bebanKerja").fadeOut("slow", function () {
       $("#containerHasil").fadeIn("slow");
     });
-  }, 500);
+  }, 250);
 
   hitungBK();
 }
@@ -451,7 +451,7 @@ function hitungBKRataRata() {
     } else {
       var batasISBB = 28;
     }
-  } else if (totalBKRataRata <= 500) {
+  } else if (totalBKRataRata <= 250) {
     var kategoriBK = "Berat";
     if (persenWaktu <= 25) {
       var batasISBB = 30.5;
