@@ -144,6 +144,14 @@ var dataBebanKerja = {
   ],
 };
 
+// Fungsi pop up
+function informasi() {
+  var myModal = new bootstrap.Modal(document.getElementById('infoModal'), {
+    keyboard: false
+  });
+  myModal.show();
+}
+
 // Fungsi untuk mengedit judul pekerjaan
 function editJudul(button) {
   var judul = button.closest('.card-body').querySelector('.cardTitle');
@@ -160,16 +168,20 @@ function editJudul(button) {
 function backToISBBProfile() {
   var containerISBBProfile = document.getElementById("containerISBBProfile");
   var containerBebanKerja = document.getElementById("bebanKerja");
+  var informasi = document.getElementById("informasi");
   containerISBBProfile.style.display = "block";
   containerBebanKerja.style.display = "none";
+  informasi.style.display = "none";
 }
 
 // Fungsi untuk kembali page beban kerja
 function backToBebanKerja() {
   var containerBebanKerja = document.getElementById("bebanKerja");
   var containerHasil = document.getElementById("containerHasil");
+  var informasi = document.getElementById("informasi");
   containerBebanKerja.style.display = "block";
   containerHasil.style.display = "none";
+  informasi.style.display = "block"
 }
 
 // Fungsi untuk menghitung ISBB
@@ -213,7 +225,7 @@ function hideISBBProfile() {
   // Animasi fadeout dan feadein
   setTimeout(function () {
     $(".containerISBBProfile").fadeOut("slow", function () {
-      $("#bebanKerja").fadeIn("slow");
+      $("#bebanKerja, #informasi").fadeIn("slow");
     });
   }, 250);
 }
@@ -263,6 +275,7 @@ var waktuKerjaArray = [];
 
 // Fungsi untuk memvalidasi apakah semua form telah terisi
 function validasiInput() {
+  document.getElementById("informasi").style.display = "none";
   var inputs = document.querySelectorAll(
     ".kalkulatorBebanKerja input[required], select[required]"
   );

@@ -116,7 +116,7 @@
   }
 
 /* PAGE KALKULATOR BEBAN KERJA */
-.kalkulatorBebanKerja .bebanKerja, #containerHasil {
+.kalkulatorBebanKerja .bebanKerja, #containerHasil, .kalkulatorBebanKerja #informasi {
   display: none; 
 }
 
